@@ -102,11 +102,24 @@ def test_internal_links_resolve():
 
 
 def test_external_github_repo_links_resolve():
+    """External GitHub repo links in *native Bible content* must resolve.
+
+    Mirrored upstream specs (under SPEC/) are exempt — they can legitimately
+    reference private or yet-to-be-created upstream repos. Auto-generated
+    repo pages (repos/<name>.md) are also exempt because they embed first-
+    paragraph excerpts from upstream READMEs.
+    """
+    NATIVE_DIRS_FOR_EXTERNAL = {"quickstart"}
+    NATIVE_FILES_FOR_EXTERNAL = {"README.md", "CONTRIBUTING.md", "index.html",
+                                  "SPEC/_index.md", "repos/_index.md"}
     broken: list[str] = []
     for p in iter_committed_files():
         if p.suffix.lower() not in (".md", ".html"):
             continue
         rel = p.relative_to(REPO_ROOT).as_posix()
+        head = rel.split("/", 1)[0]
+        if rel not in NATIVE_FILES_FOR_EXTERNAL and head not in NATIVE_DIRS_FOR_EXTERNAL:
+            continue
         try:
             text = p.read_text(encoding="utf-8", errors="ignore")
         except OSError:
