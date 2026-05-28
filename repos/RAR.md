@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/RAR
 - Default branch: `main`
-- Last updated: 2026-05-21T22:59:35Z
+- Last updated: 2026-05-28T07:52:21Z
 - License: MIT
 
 ## Description
