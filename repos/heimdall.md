@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/heimdall
 - Default branch: `main`
-- Last updated: 2026-05-18T20:09:24Z
+- Last updated: 2026-05-27T17:42:50Z
 - License: unspecified
 
 ## Description
