@@ -2,10 +2,13 @@
 """
 RAPP Bible — validate.
 
-Runs the Bible's own test suite plus invokes any cross-validators in
-mirrored specs that expose one. Currently RAPP-Network ships
-`scripts/cross_validate.py`; if that file is fetched in a future sync it
-will be invoked here.
+Runs the Bible's own test suite (`tests/`), which includes the spec-freshness
+and link checks.
+
+Note: upstream cross-validators (e.g. RAPP-Network's `scripts/cross_validate.py`)
+are NOT invoked here — `mirror_sync.py` only fetches spec files, not validator
+scripts, so there is nothing to shell out to. If validator scripts are ever
+mirrored in the future, wire them in here and update this docstring.
 
 Usage:
     python3 scripts/validate.py
