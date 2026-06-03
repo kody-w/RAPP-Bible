@@ -48,6 +48,11 @@ have drifted from upstream HEAD.
 |------|-------------|
 | [mcp/SPEC.md](mcp/SPEC.md) | The MCP on-ramp — `rapp-mcp-spec/1.0`: serve agents + a brainstem to any MCP host. |
 
+MCP is **transport, not a new taxonomy.** An MCP host is a Layer-2 caller of
+`/chat` per [Constitution Article XXV — Chat Is The Only Wire](kernel/CONSTITUTION.md#article-xxv--chat-is-the-only-wire-time-travel-safe):
+"an MCP client over stdio … hit the same endpoint." It is not a new unit, kind,
+or taxonomy — there is no `mcp` kind.
+
 ---
 
 _Mirrored content is read-only inside this repo. To change a spec, open a PR upstream._

@@ -54,6 +54,10 @@ See [quickstart/install.md](quickstart/install.md) for the full path.
             [ rapp-installer ]      [ RAPP_Sense_Store ]
               (install path)            (senses catalog)
 
+                On-ramps / transport
+                   [ rapp-mcp ]
+            (MCP host -> /chat, Layer 2)
+
                 Distribution & UX wrappers
         +------------------+------------------+
         |                  |                  |

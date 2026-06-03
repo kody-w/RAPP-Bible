@@ -33,7 +33,8 @@ def test_index_html_parses_and_has_content():
     # Content: must reference the SPEC index and at least one core repo
     assert "SPEC/_index.md" in text
     assert "repos/_index.md" in text
-    # Must reference at least 6 Tier-1 repo pages
+    # Must reference every Tier-1 repo page
     for repo in ("RAPP.md", "RAPP-Network.md", "RAPP_Store.md",
-                 "RAR.md", "RAPP_Sense_Store.md", "rapp-installer.md"):
+                 "RAR.md", "RAPP_Sense_Store.md", "rapp-installer.md",
+                 "rapp-mcp.md"):
         assert f"repos/{repo}" in text, f"index.html missing link to repos/{repo}"
