@@ -42,6 +42,12 @@ have drifted from upstream HEAD.
 |------|-------------|
 | [senses/SPEC.md](senses/SPEC.md) | Per-channel output overlay catalog. |
 
+## MCP — `kody-w/rapp-mcp`
+
+| File | Description |
+|------|-------------|
+| [mcp/SPEC.md](mcp/SPEC.md) | The MCP on-ramp — `rapp-mcp-spec/1.0`: serve agents + a brainstem to any MCP host. |
+
 ---
 
 _Mirrored content is read-only inside this repo. To change a spec, open a PR upstream._

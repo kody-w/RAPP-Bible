@@ -80,6 +80,7 @@ See [quickstart/install.md](quickstart/install.md) for the full path.
 - [RAR](repos/RAR.md) — agent registry
 - [RAPP_Sense_Store](repos/RAPP_Sense_Store.md) — sense catalog
 - [rapp-installer](repos/rapp-installer.md) — install path
+- [rapp-mcp](repos/rapp-mcp.md) — MCP gateway: serve agents + a brainstem to any MCP host
 
 **Tier 2 — Distribution and ecosystem.** What ships RAPP to humans.
 See [repos/_index.md](repos/_index.md).

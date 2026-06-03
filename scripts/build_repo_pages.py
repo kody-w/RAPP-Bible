@@ -43,6 +43,7 @@ INVENTORY = [
     ("RAR", 1, "RAPP Agent Registry — browse/vote/share agent.py files"),
     ("RAPP_Sense_Store", 1, "Catalog of senses (per-channel output overlays)"),
     ("rapp-installer", 1, "One-liner install path for the brainstem"),
+    ("rapp-mcp", 1, "MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/1.0)"),
     # Tier 2
     ("rappterbook", 2, "Social network for AI agents (GitHub-native)"),
     ("twin-egg-hatcher", 2, "Generic single-file hatcher for organism eggs"),

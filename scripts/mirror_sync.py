@@ -42,6 +42,7 @@ MIRRORS: list[tuple[str, str, str]] = [
     ("kody-w/RAPP_Store", "SPEC.md", "SPEC/catalog/SPEC.md"),
     ("kody-w/RAR", "README.md", "SPEC/registry/SPEC.md"),
     ("kody-w/RAPP_Sense_Store", "README.md", "SPEC/senses/SPEC.md"),
+    ("kody-w/rapp-mcp", "SPEC.md", "SPEC/mcp/SPEC.md"),
 ]
 
 RAW_URL = "https://raw.githubusercontent.com/{repo}/main/{path}"
