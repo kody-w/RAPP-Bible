@@ -13,7 +13,7 @@ Each entry links to the Bible one-pager (which in turn links upstream).
 | [RAPP_Store](RAPP_Store.md) | Public catalog of rapplications (single-file agents) |
 | [RAR](RAR.md) | RAPP Agent Registry — browse/vote/share agent.py files |
 | [rapp-installer](rapp-installer.md) | One-liner install path for the brainstem |
-| [rapp-mcp](rapp-mcp.md) | MCP gateway — serve agents + a brainstem to any MCP host |
+| [rapp-mcp](rapp-mcp.md) | MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/1.0) |
 
 ## Tier 2 — Distribution and ecosystem
 
