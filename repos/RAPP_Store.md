@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP_Store
 - Site: https://kody-w.github.io/RAPP_Store/
 - Default branch: `main`
-- Last updated: 2026-05-09T18:37:01Z
+- Last updated: 2026-06-08T01:35:46Z
 - License: unspecified
 
 ## Description
