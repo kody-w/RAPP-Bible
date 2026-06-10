@@ -109,15 +109,22 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
     repo stays authoritative; the Bible aggregates and surfaces drift.
   </p>
   <div class="cta-row">
-    <a class="cta" href="quickstart/install.md">Get started</a>
+    <a class="cta" href="OVERVIEW.md">Read the overview</a>
+    <a class="cta secondary" href="quickstart/install.md">Get started</a>
+    <a class="cta secondary" href="THE_ONE_AGENT.md">The one agent</a>
     <a class="cta secondary" href="https://github.com/kody-w/RAPP-Bible">View on GitHub</a>
-    <a class="cta secondary" href="SPEC/_index.md">Specs</a>
-    <a class="cta secondary" href="repos/_index.md">Repos</a>
   </div>
+  <p class="tagline" style="font-size:0.95em;margin-top:14px;">
+    This Bible <strong>renders <code>ecosystem-spec.json</code> v1.0.0</strong> —
+    the single canonical machine spec, mirrored byte-identical in
+    <a href="repos/rapp-god.md">rapp-god</a> and <a href="repos/rapp-map.md">rapp-map</a> —
+    for a human reader.
+  </p>
 </header>
 
 <nav class="tabs" id="tabs">
   <div class="tab active" data-tab="overview">Overview</div>
+  <div class="tab" data-tab="ecosystem">Ecosystem</div>
   <div class="tab" data-tab="specs">Specs</div>
   <div class="tab" data-tab="repos">Repos</div>
   <div class="tab" data-tab="quickstart">Quickstart</div>
@@ -128,14 +135,25 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
 <section class="panel active" id="overview">
   <h2>What is RAPP?</h2>
   <p>
-    RAPP is a portable, shareable, vibe-swarm building tool. Single-file
-    Python agents. Local-first. Powered by GitHub Copilot. The kernel is
-    small; the ecosystem around it is large.
+    RAPP — the <strong>Rapid Agent Prototyping Platform</strong> — is a way to
+    grow AI organisms that own their own identity, carry their own memory, talk
+    to each other, and run on hardware nobody had to buy. It is "engine, not
+    experience": infrastructure only. Single-file Python agents, local-first,
+    content-addressed identity.
   </p>
   <p>
-    This Bible exists because the ecosystem has grown past the point where
-    any one README can hold it all. The map is below; the canonical
-    sources are one click away.
+    The first principle is one sentence: <strong>use everyone else's hardware to
+    run the network.</strong> There is no central server, no marketplace
+    backend, no PKI — just a small frozen kernel, single-file agents as the only
+    unit of extension, and the substrate GitHub already paid for. The whole
+    story is in <a href="OVERVIEW.md">OVERVIEW.md</a>.
+  </p>
+  <p>
+    The entire ecosystem is reachable through <strong>one single-file agent</strong> —
+    <code>@rapp/rapp</code>. Drop it into a brainstem and, through natural
+    language alone, you can orient, mint identity, plant an organism, operate
+    every scale, and <code>install</code> any specialist for everything deeper.
+    See <a href="THE_ONE_AGENT.md">THE_ONE_AGENT.md</a>.
   </p>
 
   <h2>Ecosystem map</h2>
@@ -172,24 +190,83 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
    [ heimdall ] [ kody-twin ] [ kody-w-twin ]
    [ echo-brainstem ] [ lumen-brainstem ] [ tide-brainstem ]</div>
 
-  <h2>Three tiers</h2>
+  <h2>Read-it-all docs</h2>
   <div class="grid">
     <div class="card">
-      <h4><span class="tier-pill tier-1">Tier 1</span>Core specs and kernel</h4>
-      <p>The minimum reading list. Constitution, kernel SPEC, neighborhood
-      protocol, store catalog, registry.</p>
+      <h4><a href="OVERVIEW.md">OVERVIEW.md</a></h4>
+      <p>The whole ecosystem in one read: fractal scales, 5 primitives, 7 OSI
+      layers, identity, eggs, private cubbies, governance, the metropolis vision.</p>
     </div>
     <div class="card">
-      <h4><span class="tier-pill tier-2">Tier 2</span>Distribution and ecosystem</h4>
-      <p>What ships RAPP to humans: installers, desktop wrappers, organism
-      distros, federation surfaces.</p>
+      <h4><a href="THE_ONE_AGENT.md">THE_ONE_AGENT.md</a></h4>
+      <p>The one agent — navigator + bootstrapper + core-operator +
+      universal-installer; the full 41-action surface; operator journeys.</p>
     </div>
     <div class="card">
-      <h4><span class="tier-pill tier-3">Tier 3</span>Front doors</h4>
-      <p>Example twins built on top of the kernel. Link-only — the Bible
-      does not mirror their content.</p>
+      <h4><a href="CAPABILITIES.md">CAPABILITIES.md</a></h4>
+      <p>Every capability domain, honestly: native vs install-routed vs
+      specialist-owned, with the action behind each.</p>
+    </div>
+    <div class="card">
+      <h4><a href="SCHEMAS.md">SCHEMAS.md</a></h4>
+      <p>The ~80-schema registry by family — identity, cartridges, federation,
+      governance, neuron mesh — one-line purpose each.</p>
+    </div>
+    <div class="card">
+      <h4><a href="DRIFT_TRIANGLE.md">DRIFT_TRIANGLE.md</a></h4>
+      <p>The four-leg alignment (this Bible + rapp-god + rapp-map + the agent)
+      and how <code>verify</code> keeps it in sync.</p>
     </div>
   </div>
+</section>
+
+<section class="panel" id="ecosystem">
+  <h2>The ecosystem, end to end</h2>
+  <p>
+    RAPP is fractal: the same five primitives — <strong>rappid + door + card +
+    tether + trust scope</strong> — describe a single agent, a whole organism, a
+    neighborhood, an operator's estate, and an entire metropolis. The protocol
+    does not change as you zoom out; only the scope does.
+  </p>
+
+  <h3>Fractal scales</h3>
+  <table>
+    <thead><tr><th>Scale</th><th>What it is</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>agent</strong></td><td>one <code>*_agent.py</code> — single file, class, <code>perform()</code>, metadata</td><td><code>learn_new_agent.py</code></td></tr>
+      <tr><td><strong>twin / organism</strong></td><td>one planted seed (one repo) with a front door + doorman</td><td><code>kody-w/heimdall</code></td></tr>
+      <tr><td><strong>neighborhood</strong></td><td>a community-with-a-purpose; a repo is the gate (public or private)</td><td><code>kody-w/rapp-commons</code></td></tr>
+      <tr><td><strong>estate</strong></td><td>one operator's union of all they planted + joined (two-tier)</td><td><code>~/.brainstem/estate.json</code></td></tr>
+      <tr><td><strong>metropolis</strong></td><td>an emergent mesh of estates through shared neighborhoods</td><td>the metropolis tracker</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Identity — the Eternity rappid</h3>
+  <pre>rappid:@&lt;owner&gt;/&lt;slug&gt;:&lt;64hex&gt;     (64hex = sha256 of "&lt;owner&gt;/&lt;slug&gt;")
+e.g.  rappid:@kody-w/heimdall:5f3c...e21a</pre>
+  <p>
+    The <code>@&lt;owner&gt;/&lt;slug&gt;</code> segment self-locates to
+    <code>github.com/&lt;owner&gt;/&lt;slug&gt;</code>; the kind lives in the
+    record, not the string. From a rappid, nine canonical URLs compute with zero
+    auth — which is what makes the network un-censorable.
+  </p>
+
+  <h3>The seven OSI layers</h3>
+  <table>
+    <thead><tr><th>L</th><th>Layer</th><th>What lives here</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Substrate</td><td>GitHub Pages + raw, LAN, file://, sneakernet eggs</td></tr>
+      <tr><td>2</td><td>Identity</td><td>the rappid — minted once, read forever</td></tr>
+      <tr><td>3</td><td>Discovery</td><td>lineage + catalog — parent_rappid, estate.json, RAR, rapp-god/map</td></tr>
+      <tr><td>4</td><td>Channels</td><td>WebRTC tether, Issues, PRs, raw fetch</td></tr>
+      <tr><td>5</td><td>Trust scope</td><td>personal / neighborhood / public; collaborator-gated; sealed channel</td></tr>
+      <tr><td>6</td><td>Envelope</td><td>the egg family, the twin-chat envelope, the VOICE / TWIN slots</td></tr>
+      <tr><td>7</td><td>Application</td><td>the agent + /chat layer; organs; the agent-built web</td></tr>
+    </tbody>
+  </table>
+
+  <p>Full treatment in <a href="OVERVIEW.md">OVERVIEW.md</a>. Honest capability
+  coverage in <a href="CAPABILITIES.md">CAPABILITIES.md</a>.</p>
 </section>
 
 <section class="panel" id="specs">
@@ -229,44 +306,88 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
   <p>Every RAPP-ecosystem repo the Bible knows about. Each links to a
   one-pager with metadata, role, and a direct link to the canonical source.</p>
 
-  <h3>Tier 1 — Core</h3>
+  <p>Grouped by the <code>ecosystem-spec.json</code> v1.0.0 <code>repos</code>
+  families. The most important "repo" is not a repo: it is
+  <a href="THE_ONE_AGENT.md">the one agent</a>, <code>@rapp/rapp</code>, which
+  lives in RAR and makes everything below reachable through natural language.</p>
+
+  <h3>Kernel &amp; install</h3>
   <table>
     <thead><tr><th>Repo</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><a href="repos/RAPP.md">RAPP</a></td><td>Kernel and organism spec.</td></tr>
-      <tr><td><a href="repos/RAPP-Network.md">RAPP-Network</a></td><td>Project-anchored twin neighborhoods.</td></tr>
+      <tr><td><a href="repos/RAPP.md">RAPP</a></td><td>Species root — kernel + specs + Constitution + the canonical spec.</td></tr>
+      <tr><td><a href="repos/rapp_kernel.md">rapp_kernel</a></td><td>The frozen DNA archive (kernel snapshots).</td></tr>
+      <tr><td><a href="repos/rapp-installer.md">rapp-installer</a></td><td>The <code>curl | bash</code> install front door.</td></tr>
+      <tr><td><a href="repos/RAPP_Desktop.md">RAPP_Desktop</a></td><td>Native desktop app.</td></tr>
+      <tr><td><a href="repos/rapp-vscode-extension.md">rapp-vscode-extension</a></td><td>VS Code extension.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Identity &amp; registry</h3>
+  <table>
+    <thead><tr><th>Repo</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><a href="repos/rapp-god.md">rapp-god</a></td><td>Registry of every part + version; drift observatory; hosts the spec.</td></tr>
+      <tr><td><a href="repos/rapp-map.md">rapp-map</a></td><td>Which repo houses which part; the neuron mesh; hosts the spec.</td></tr>
+      <tr><td><a href="repos/RAR.md">RAR</a></td><td>Single-file agent registry — home of <code>@rapp/rapp</code>.</td></tr>
+      <tr><td><a href="repos/rapp-static-apis.md">rapp-static-apis</a></td><td>APIs on GitHub raw, no server.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Stores &amp; catalogs</h3>
+  <table>
+    <thead><tr><th>Repo</th><th>Role</th></tr></thead>
+    <tbody>
       <tr><td><a href="repos/RAPP_Store.md">RAPP_Store</a></td><td>Catalog of rapplications.</td></tr>
-      <tr><td><a href="repos/RAR.md">RAR</a></td><td>Single-file agent registry.</td></tr>
       <tr><td><a href="repos/RAPP_Sense_Store.md">RAPP_Sense_Store</a></td><td>Catalog of senses.</td></tr>
-      <tr><td><a href="repos/rapp-installer.md">rapp-installer</a></td><td>One-liner install path.</td></tr>
-      <tr><td><a href="repos/rapp-mcp.md">rapp-mcp</a></td><td>MCP transport — any MCP host is a Layer-2 caller of <code>/chat</code> (rapp-mcp-spec/1.0).</td></tr>
+      <tr><td><a href="repos/rapp-egg-hub.md">rapp-egg-hub</a></td><td>Public hub for <code>.egg</code> cartridges.</td></tr>
     </tbody>
   </table>
 
-  <h3>Tier 2 — Distribution and ecosystem</h3>
+  <h3>Run a brainstem · channels &amp; trust</h3>
   <table>
     <thead><tr><th>Repo</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><a href="repos/rappterbook.md">rappterbook</a></td><td>Social network for AI agents.</td></tr>
-      <tr><td><a href="repos/twin-egg-hatcher.md">twin-egg-hatcher</a></td><td>Generic organism-egg hatcher.</td></tr>
-      <tr><td><a href="repos/ez-rapp.md">ez-rapp</a></td><td>Electron desktop wrapper.</td></tr>
-      <tr><td><a href="repos/openrappter.md">openrappter</a></td><td>Copilot-SDK-powered local agent.</td></tr>
-      <tr><td><a href="repos/rapp-leviathan-hub.md">rapp-leviathan-hub</a></td><td>.leviathan.egg distribution hub.</td></tr>
-      <tr><td><a href="repos/rapp-commons.md">rapp-commons</a></td><td>Cross-estate signed event stream.</td></tr>
-      <tr><td><a href="repos/rapp-estate.md">rapp-estate</a></td><td>Operator's estate inventory.</td></tr>
-      <tr><td><a href="repos/rappter-distro.md">rappter-distro</a></td><td>Organism distro on top of the kernel.</td></tr>
-      <tr><td><a href="repos/rappterverse.md">rappterverse</a></td><td>RAPPverse federation hub.</td></tr>
-      <tr><td><a href="repos/rappterbox.md">rappterbox</a></td><td>Local-first brainstem console.</td></tr>
+      <tr><td><a href="repos/vbrainstem.md">vbrainstem</a></td><td>Browser-native runtime + tethered multi-participant surface.</td></tr>
+      <tr><td><a href="repos/rapp-brainstem-sdk.md">rapp-brainstem-sdk</a></td><td>Headless SDK serving the <code>/chat</code> contract.</td></tr>
+      <tr><td><a href="repos/rapp-sealed.md">rapp-sealed</a></td><td>The sealed channel — AES-256-GCM codec.</td></tr>
+      <tr><td><a href="repos/rapp-kite.md">rapp-kite</a></td><td>The string — operate kited twins.</td></tr>
+      <tr><td><a href="repos/rapp-doorman.md">rapp-doorman</a></td><td>The sealed-door chat surface.</td></tr>
     </tbody>
   </table>
 
-  <h3>Tier 3 — Front doors</h3>
+  <h3>Front doors &amp; neighborhoods</h3>
   <table>
     <thead><tr><th>Repo</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td><a href="repos/heimdall.md">heimdall</a></td><td>Front door — Heimdall.</td></tr>
-      <tr><td><a href="repos/kody-twin.md">kody-twin</a></td><td>Front door — Kody Wildfeuer.</td></tr>
-      <tr><td><a href="repos/kody-w-twin.md">kody-w-twin</a></td><td>Front door — Kody Wildfeuer (v2).</td></tr>
+      <tr><td><a href="repos/rapp-vneighborhood.md">rapp-vneighborhood</a></td><td>Front-door template (a public repo <em>is</em> the front door).</td></tr>
+      <tr><td><a href="repos/rapp-commons.md">rapp-commons</a></td><td>The global town square (signed event stream).</td></tr>
+      <tr><td><a href="repos/rapp-god-forum.md">rapp-god-forum</a></td><td>Threaded forum on the signed commons.</td></tr>
+      <tr><td><a href="repos/rapp-resident.md">rapp-resident</a></td><td>Permanent cloud relay serving signed event rooms.</td></tr>
+      <tr><td><a href="repos/rapp-estate.md">rapp-estate</a></td><td>Local-first inventory of one operator's estate.</td></tr>
+      <tr><td><a href="repos/RAPP-Network.md">RAPP-Network</a></td><td>Public neighborhood instances.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The agent-built web · MCP &amp; cartridges · memory</h3>
+  <table>
+    <thead><tr><th>Repo</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><a href="repos/rionet.md">rionet</a></td><td>The agent-built-web federation layer.</td></tr>
+      <tr><td><a href="repos/rio.md">rio</a></td><td>RIO, the browser (OSI Layer 7).</td></tr>
+      <tr><td><a href="repos/rapp-mcp.md">rapp-mcp</a></td><td>MCP gateway — any host is a Layer-2 caller of <code>/chat</code>.</td></tr>
+      <tr><td><a href="repos/racon.md">racon</a></td><td>Experience cartridges.</td></tr>
+      <tr><td><a href="repos/rapp-carts.md">rapp-carts</a></td><td>The cartridge spec — master egg-family schema.</td></tr>
+      <tr><td><a href="repos/CommunityRAPP.md">CommunityRAPP</a></td><td>The RAPP Hippocampus (persistent memory).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Front doors (link only)</h3>
+  <table>
+    <thead><tr><th>Repo</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><a href="repos/heimdall.md">heimdall</a></td><td>Front door — Heimdall (the canonical twin example).</td></tr>
+      <tr><td><a href="repos/kody-twin.md">kody-twin</a></td><td>Front door — operator twin.</td></tr>
       <tr><td><a href="repos/echo-brainstem.md">echo-brainstem</a></td><td>Front door — Echo.</td></tr>
       <tr><td><a href="repos/lumen-brainstem.md">lumen-brainstem</a></td><td>Front door — Lumen.</td></tr>
       <tr><td><a href="repos/tide-brainstem.md">tide-brainstem</a></td><td>Front door — Tide.</td></tr>
@@ -280,28 +401,38 @@ footer { max-width: 980px; margin: 0 auto; padding: 40px 24px;
   <h2>Quickstart</h2>
   <p>Pick a path. All commands are paste-able.</p>
 
-  <h3>1. Install the brainstem</h3>
-  <pre>curl -fsSL https://raw.githubusercontent.com/kody-w/rapp-installer/main/install.sh | bash</pre>
-  <p>Or follow <a href="quickstart/install.md">quickstart/install.md</a>.</p>
+  <h3>1. Install the brainstem (the canonical one-liner)</h3>
+  <pre>curl -fsSL https://kody-w.github.io/RAPP/installer/install.sh | bash</pre>
+  <p>That URL shape is sacred. It mints your personal Eternity rappid once and
+  records a <code>birth</code> event. Details:
+  <a href="quickstart/install.md">quickstart/install.md</a>.</p>
 
-  <h3>2. Drop in your first agent</h3>
+  <h3>2. Drop in your first agent (start with the one agent)</h3>
   <p>Browse <a href="https://kody-w.github.io/RAR/">the RAR (agent registry)</a>,
-  download an <code>*_agent.py</code> file, drop it into
-  <code>~/.brainstem/agents/</code>. Restart the brainstem.</p>
+  download <code>@rapp/rapp</code> (or any <code>*_agent.py</code>), drop it into
+  <code>~/.brainstem/agents/</code>. It hot-loads.</p>
   <p>Walkthrough: <a href="quickstart/drop-in-an-agent.md">quickstart/drop-in-an-agent.md</a>.</p>
 
-  <h3>3. Build your first twin</h3>
-  <p>See <a href="quickstart/your-first-twin.md">quickstart/your-first-twin.md</a>.</p>
+  <h3>3. Plant your first twin</h3>
+  <p>An organism with its own Eternity rappid + front door:
+  <a href="quickstart/your-first-twin.md">quickstart/your-first-twin.md</a>.</p>
 
-  <h3>4. Build your first rapplication</h3>
+  <h3>4. Join a neighborhood &amp; share</h3>
+  <p>Publish your estate, join a gate, share offline over an egg:
+  <a href="quickstart/join-and-share.md">quickstart/join-and-share.md</a>.</p>
+
+  <h3>5. Build your first rapplication</h3>
   <p>See <a href="quickstart/your-first-rapplication.md">quickstart/your-first-rapplication.md</a>.</p>
 </section>
 
 </main>
 
 <footer>
-  <p>RAPP Bible is BSD-3-Clause. Two sources of truth: each canonical repo
-  stays authoritative; this site aggregates. Edits happen upstream. Source:
+  <p>The RAPP Bible renders <code>ecosystem-spec.json</code> <strong>v1.0.0</strong>
+  for a human reader. It is one leg of the four-leg
+  <a href="DRIFT_TRIANGLE.md">drift triangle</a> (this Bible + rapp-god +
+  rapp-map + the one agent); where this Bible and the spec JSON disagree, the
+  JSON wins. Source:
   <a href="https://github.com/kody-w/RAPP-Bible">github.com/kody-w/RAPP-Bible</a>.</p>
 </footer>
 

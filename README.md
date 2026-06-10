@@ -1,122 +1,110 @@
-# RAPP Bible
+# The RAPP Bible
 
-**One repo. Every RAPP spec. Every entry point. Every link.**
+**One repo you can read if it's the only thing you have, and understand the entire RAPP ecosystem end-to-end** — what it is, why it exists, how every piece fits, how to use it, the one agent, the schemas, the repos, the journeys.
 
-The RAPP Bible is the canonical aggregation point for the entire
-[RAPP](https://github.com/kody-w/RAPP) (Rapid Agent Prototyping Platform)
-ecosystem. It mirrors the specs from each canonical repo, indexes every
-front door, and gives anyone landing here a complete map of what exists and
-where to go next.
-
-**Two sources of truth.** Each canonical repo stays authoritative. The
-Bible aggregates and surfaces drift via a nightly sync. If you want to
-change a spec, open a PR upstream.
+> **Version note.** This Bible **renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.0.0** — the single canonical machine description of the ecosystem, published byte-identical to two grail mirrors ([rapp-god](https://github.com/kody-w/rapp-god) + [rapp-map](https://github.com/kody-w/rapp-map)) and rendered here for a human reader. Where this Bible and that JSON disagree, **the JSON wins** and the Bible is the leg that drifted (see [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)).
 
 - Site: https://kody-w.github.io/RAPP-Bible/
 - Repo: https://github.com/kody-w/RAPP-Bible
-- License: BSD-3-Clause
+- Canonical source: [kody-w/RAPP](https://github.com/kody-w/RAPP)
+
+---
+
+## Start here
+
+If you read **one** file, read **[`OVERVIEW.md`](OVERVIEW.md)** — the whole ecosystem in one pass.
+
+Then follow your role:
+
+- **"Just tell me what RAPP is"** → [`OVERVIEW.md`](OVERVIEW.md)
+- **"I want to use it right now"** → [`quickstart/install.md`](quickstart/install.md)
+- **"How does one agent reach everything?"** → [`THE_ONE_AGENT.md`](THE_ONE_AGENT.md)
+- **"What can it actually do?"** → [`CAPABILITIES.md`](CAPABILITIES.md)
+- **"I'm building on it"** → [`SCHEMAS.md`](SCHEMAS.md) + [`SPEC/_index.md`](SPEC/_index.md)
+- **"Which repo is which?"** → [`repos/_index.md`](repos/_index.md)
+- **"How does the truth stay one truth?"** → [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)
+
+---
 
 ## What is RAPP?
 
-RAPP is a portable, shareable, vibe-swarm building tool. Single-file Python
-agents. Local-first. Powered by GitHub Copilot. The kernel is small; the
-ecosystem around it is large.
+RAPP — the **Rapid Agent Prototyping Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you must adopt.
 
-This Bible exists because the ecosystem has grown past the point where any
-one README can hold it all. Land here, find what you need, follow the link
-to the canonical source.
+## The first principle
 
-## Quickstart
+> **Use everyone else's hardware to run the network.**
 
-```bash
-# Install the brainstem (one-liner from rapp-installer)
-curl -fsSL https://raw.githubusercontent.com/kody-w/rapp-installer/main/install.sh | bash
+GitHub already paid for the global CDN, the auth, the durable mailbox (Issues), the consent gate (PRs), and the edge endpoints (Pages). RAPP does not build a network — it uses the one already running. There is no central server, no marketplace backend, no PKI. There is a small frozen kernel that runs locally, single-file agents as the only unit of extension, and content-addressed identity so nothing needs to be registered with anyone who could shut it down.
 
-# Drop an agent into ~/.brainstem/agents/ — it just runs
-# Browse agents at https://kody-w.github.io/RAR/
+## The one-agent story
+
+The entire ecosystem is reachable through **one single-file agent**: `rapp_agent.py`, published as `@rapp/rapp` in [RAR](https://github.com/kody-w/RAR). Drop that ONE file into a brainstem's `agents/` directory and — through natural language alone — an operator can orient in the ecosystem, mint identity, plant an organism, operate every scale, and `install` any specialist agent for everything deeper. It is **navigator + bootstrapper + core-operator + universal-installer**, airdroppable and offline-safe. Full story: [`THE_ONE_AGENT.md`](THE_ONE_AGENT.md).
+
+---
+
+## Table of contents
+
+### Read-it-all docs (synthesized for humans)
+| File | What it is |
+|---|---|
+| [`OVERVIEW.md`](OVERVIEW.md) | The whole ecosystem in one read: fractal scales, 5 primitives, 7 OSI layers, the two surfaces, identity (Eternity rappid), eggs, private cubbies / dark doors, governance, the metropolis vision. **The "if you read one file" file.** |
+| [`THE_ONE_AGENT.md`](THE_ONE_AGENT.md) | `@rapp/rapp` — the navigator + bootstrapper + core-operator + universal-installer; the full 41-action surface, grouped; the operator journeys; offline/woods behavior. |
+| [`CAPABILITIES.md`](CAPABILITIES.md) | Every capability domain, honestly: native vs install-routed vs specialist-owned, with the action behind each. |
+| [`SCHEMAS.md`](SCHEMAS.md) | The ~80-schema registry by family, one-line purpose each. |
+| [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md) | The four-leg alignment (this Bible + rapp-god + rapp-map + the agent) and how `verify` / the `ecosystem-sync` swarm keep it in sync. |
+
+### Quickstart (zero → running → planting → joining → sharing)
+| File | Path step |
+|---|---|
+| [`quickstart/install.md`](quickstart/install.md) | Install the brainstem (the canonical one-liner). |
+| [`quickstart/drop-in-an-agent.md`](quickstart/drop-in-an-agent.md) | Drop a single-file agent in. |
+| [`quickstart/your-first-twin.md`](quickstart/your-first-twin.md) | Plant an organism with its own Eternity rappid. |
+| [`quickstart/join-and-share.md`](quickstart/join-and-share.md) | Publish your estate, join a neighborhood, share offline. |
+| [`quickstart/your-first-rapplication.md`](quickstart/your-first-rapplication.md) | Build a graduated rapplication. |
+
+### Specs (canonical, mirrored from upstream)
+[`SPEC/_index.md`](SPEC/_index.md) — kernel (Constitution, SPEC, Neighborhood Protocol, Estate Spec, Twin Lifecycle, Neighborhood Egg), plus network / catalog / registry / senses / mcp.
+
+### Repos (one page per repo)
+[`repos/_index.md`](repos/_index.md) — grouped by the spec's `repos` families: kernel & install, identity & registry, stores & catalogs, run-a-brainstem, channels & trust, front doors & neighborhoods, the agent-built web, MCP & cartridges, memory & social.
+
+---
+
+## The map in one diagram
+
+```
+                    rappid:@<owner>/<slug>:<64hex>          ← identity (Eternity)
+                              │
+        ┌─────────────────────┴─────────────────────┐
+        │   one frozen kernel + single-file agents   │       ← OSI L7 application
+        └─────────────────────┬─────────────────────┘
+                              │
+   ┌──────────────────────────┼──────────────────────────┐
+   │ agent → twin → neighborhood → estate → metropolis    │   ← fractal scales
+   └──────────────────────────┼──────────────────────────┘
+                              │
+   substrate: GitHub Pages + raw.githubusercontent.com + LAN + eggs   ← OSI L1
+                              │
+   four-leg drift triangle: agent · rapp-god · rapp-map · this Bible   ← governance
 ```
 
-See [quickstart/install.md](quickstart/install.md) for the full path.
+---
 
-## Ecosystem map
+## How the truth stays one truth
 
-```
-                          [ kody-w/RAPP ]
-                         (kernel + spec)
-                                |
-        +-----------------------+-----------------------+
-        |                       |                       |
-   [ RAPP-Network ]        [ RAPP_Store ]          [ RAR ]
-   (neighborhoods)       (rapplications)     (single-file agents)
-        |                       |                       |
-        +-----------+-----------+-----------+-----------+
-                    |                       |
-            [ rapp-installer ]      [ RAPP_Sense_Store ]
-              (install path)            (senses catalog)
+The ecosystem is described in four independent places — the one agent's action enum, rapp-god's spec, rapp-map's byte-identical mirror, and this Bible — so that any divergence between them *is* detectable drift. The agent's `action=verify` self-checks all four legs; the `ecosystem-sync` swarm re-derives the spec from the live ecosystem and reconciles. No single point can silently rot. This Bible is pinned to **v1.0.0**. See [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
 
-                On-ramps / transport
-                   [ rapp-mcp ]
-            (MCP host -> /chat, Layer 2)
+(This replaces the older "two sources of truth" framing: there are four legs, and they cross-check each other.)
 
-                Distribution & UX wrappers
-        +------------------+------------------+
-        |                  |                  |
-   [ rappterbook ]   [ rappter-distro ]   [ ez-rapp ]
-   (social net)     (organism distro)    (Electron UX)
-                    [ rappterbox ]      [ openrappter ]
-                    (console)           (Copilot SDK agent)
+---
 
-           Federation surfaces
-   [ rapp-commons ]   [ rapp-leviathan-hub ]   [ rapp-estate ]
-   (signed events)    (egg distribution)       (operator inventory)
+## Conventions in this Bible
 
-       Front doors (link only — don't mirror)
-   [ heimdall ] [ kody-twin ] [ kody-w-twin ]
-   [ echo-brainstem ] [ lumen-brainstem ] [ tide-brainstem ]
-```
-
-## Three tiers
-
-**Tier 1 — Core specs and kernel.** What you read to understand the system.
-- [RAPP](repos/RAPP.md) — kernel + constitution
-- [RAPP-Network](repos/RAPP-Network.md) — neighborhood layer
-- [RAPP_Store](repos/RAPP_Store.md) — rapplication catalog
-- [RAR](repos/RAR.md) — agent registry
-- [RAPP_Sense_Store](repos/RAPP_Sense_Store.md) — sense catalog
-- [rapp-installer](repos/rapp-installer.md) — install path
-- [rapp-mcp](repos/rapp-mcp.md) — MCP gateway: serve agents + a brainstem to any MCP host
-
-**Tier 2 — Distribution and ecosystem.** What ships RAPP to humans.
-See [repos/_index.md](repos/_index.md).
-
-**Tier 3 — Front doors.** Example twins built on top of the kernel.
-Link-only — the Bible does not mirror their content.
-
-## What's in here
-
-- [SPEC/](SPEC/_index.md) — every mirrored spec, with provenance headers
-- [repos/](repos/_index.md) — one-pager per repo with metadata and links
-- [quickstart/](quickstart/install.md) — paste-able getting-started flows
-- [scripts/](scripts/) — `mirror_sync.py` (re-sync from upstream),
-  `validate.py` (run cross-validators), `build_repo_pages.py`
-- [tests/](tests/) — link checks, freshness checks, PII guards
-- [CONTRIBUTING.md](CONTRIBUTING.md) — how the two-sources-of-truth model works
-
-## How to contribute
-
-You almost certainly don't want to edit files in this repo directly. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for where to actually make changes.
-
-## Excluded by design
-
-Some RAPP-ecosystem repos are private and intentionally not surfaced here.
-The Bible never references private repos as content sources. See
-`tests/test_no_private.py` for the enforced exclusion list.
-
-The Bible also never includes customer or engagement names. See
-`tests/test_no_pii.py` for the enforced banned-name list. If you spot a
-leak, open an issue.
+- **Eternity rappid only.** Every example uses `rappid:@<owner>/<slug>:<64hex>` (SHA-256 of `<owner>/<slug>`; kind lives in the record). Legacy `rappid:v2:…` is canonicalized on read, never emitted.
+- **One term for the plugin unit: `agent`.** Never skill / plugin / routine / loop (ANTIPATTERNS §1).
+- **No private repos.** The Bible never references private-only repos as content sources or names customers / engagements.
+- **The kernel is sacred.** `brainstem.py` + `basic_agent.py` are universal DNA, never edited. Capabilities grow as new agents / organs.
 
 ## License
 
-BSD-3-Clause. See [LICENSE](LICENSE).
+See [LICENSE](LICENSE).
