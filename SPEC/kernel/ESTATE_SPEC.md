@@ -14,24 +14,23 @@ If you are writing a planter, an estate agent, a federation walker, a holocard r
 
 ## 1. The rappid IS the URL
 
-The canonical v2 rappid format:
+The **consolidated** rappid format (locked 2026-06-03):
 
 ```
-rappid:v2:<kind>:@<owner>/<repo>:<32-hex-no-dashes>@github.com/<owner>/<repo>
+rappid:@<owner>/<slug>:<64hex>
 ```
 
-The `<owner>/<repo>` segment appears **twice** by design — first as the abbreviated identity reference, then as the full origin pin. Both MUST be the same string. A rappid where they disagree is invalid and MUST be rejected (Article XLVI.5).
-
-From this string alone, by **string parsing** (not lookup, not config, not env), you derive:
+`@<owner>/<slug>` is the **location** — `github.com/<owner>/<slug>` is the door. From this string alone, by **string parsing** (not lookup, not config, not env), you derive every door URL in §2:
 
 | Field | How |
 |---|---|
-| `kind` | The token between `rappid:v2:` and `:@` |
-| `owner` | Everything after `@` and before `/` in the first segment |
-| `repo` | Everything after `/` and before `:` in the first segment |
-| `door_type` | `"front_door"` if `kind == "twin"`, else `"gate"` (XLVI.2) |
+| `owner` | Everything after `@` and before `/` |
+| `repo` (`slug`) | Everything after `/` and before the final `:` |
+| `hash` | The 64-hex after the final `:` — the 256-bit identity / join key |
 
-**Valid kinds** (frozen as of 2026-05-09): `twin`, `neighborhood`, `ant-farm`, `braintrust`, `workspace`, `hatched`, `rapplication`, `prototype`, `operator`. Adding a new kind requires a CONSTITUTION amendment because every consumer derives behavior from this token.
+`kind` (→ `door_type`) is **no longer in the string** — it lives in the door's `rappid.json` record (fetch the `identity` URL in §2). The pure-string `door_from_rappid()` returns the URLs (location) for any door; `kind`/`door_type` come from the record (or, for a legacy v2 string, are read inline). Legacy forms — v2 `rappid:v2:<kind>:@<owner>/<repo>:<32hex>@github.com/<owner>/<repo>` and bare UUIDs — are read-compatible via `door_address.py` (`canonicalize_rappid`).
+
+**Valid kinds** (frozen as of 2026-05-09; **amended 2026-06-02** per CONSTITUTION Art. XLVI.2 to ratify the single-presence kinds already shipped across the kernel, RAR, and RAPP-Network): single AI presences → `front_door`: `twin`, `operator`, `personal`, `project`, `memorial`, `pre-founder`, `mirror`, `experiment`, `custom`; community spaces you enter → `gate`: `neighborhood`, `ant-farm`, `braintrust`, `workspace`, `hatched`, `rapplication`, `prototype`, `place`. Adding a new kind requires a CONSTITUTION amendment because every consumer derives behavior from this token; the canonical machine-readable set is `VALID_KINDS` / `_FRONT_DOOR_KINDS` in `tools/door_address.py` (the one parser consumers MUST import).
 
 ---
 
@@ -68,7 +67,7 @@ Per Article XLVI.3, each entry stores **only**:
 
 ```json
 {
-  "rappid": "rappid:v2:twin:@owner/repo:hex@github.com/owner/repo",
+  "rappid": "rappid:@owner/repo:hex",
   "added_at": "2026-05-09T00:00:00Z",
   "via": "created" | "scan" | "manual" | "import" | "published-by-other"
 }
@@ -84,7 +83,7 @@ This is the constitutional answer to *"don't do all of these exception things."*
 {
   "schema": "rapp-estate/1.1",
   "owner": {
-    "rappid": "rappid:v2:operator:@<github>/<their-twin-or-brainstem>:hex@github.com/<github>/...",
+    "rappid": "rappid:@<github>/<their-twin-or-brainstem>:hex",
     "github": "<github-handle>"
   },
   "created": [{ "rappid": "...", "added_at": "...", "via": "created" }],
@@ -110,7 +109,7 @@ A consumer MUST be able to discover any door, and any user's full estate, with `
 
 ```bash
 # From the rappid, parse <owner>/<repo>:
-RAPPID='rappid:v2:twin:@kody-w/echo-brainstem:abc...@github.com/kody-w/echo-brainstem'
+RAPPID='rappid:@kody-w/echo-brainstem:abc...'
 OWNER_REPO=$(echo "$RAPPID" | sed 's|.*:@\([^:]*\):.*|\1|')
 
 # Fetch identity, holocard, holo.md, etc.:
@@ -286,7 +285,7 @@ The estate cartridge is the `brainstem-egg/2.3-estate` member of the egg family 
   "schema": "brainstem-egg/2.3-estate",
   "scale":  "estate",
   "rapp_egg_version": "2.0",
-  "owner_rappid": "rappid:v2:operator:@<gh>/<their-brainstem>:hex@github.com/<gh>/...",
+  "owner_rappid": "rappid:@<gh>/<their-brainstem>:hex",
   "estate_snapshot_at": "<iso8601>",
   "members": [ /* see 7.6.2 */ ]
 }
