@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/RAR
 - Default branch: `main`
-- Last updated: 2026-05-21T22:59:35Z
+- Last updated: 2026-06-27T06:48:55Z
 - License: MIT
 
 ## Description
@@ -17,16 +17,7 @@ The open single-file AI agent registry. Browse, vote, share agent.py files. Poke
 
 ## Role in the ecosystem
 
-RAPP Agent Registry — browse/vote/share agent.py files. It is the home of
-**`@rapp/rapp`** (`rapp_agent.py`), [the one agent](../THE_ONE_AGENT.md) that
-makes the entire ecosystem reachable through natural language — and of every
-specialist agent the one agent `install`s on demand (`@rapp/twin_agent`,
-`@rapp/egg_hatcher`, and the rest).
-
-It is also **leg one of the [drift triangle](../DRIFT_TRIANGLE.md)**: the live
-agent's action enum is the executable contract that `ecosystem-spec.json`
-describes. `action=verify` asserts the enum is a superset of the spec's
-`required_actions`.
+RAPP Agent Registry — browse/vote/share agent.py files
 
 ---
 
