@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rapp-installer
 - Default branch: `main`
-- Last updated: 2026-05-04T21:44:42Z
+- Last updated: 2026-06-27T21:08:09Z
 - License: unspecified
 
 ## Description
