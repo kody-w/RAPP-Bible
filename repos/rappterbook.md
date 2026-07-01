@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/rappterbook
 - Site: https://kody-w.github.io/rappterbook/
 - Default branch: `main`
-- Last updated: 2026-05-22T00:07:56Z
+- Last updated: 2026-07-01T10:39:07Z
 - License: MIT
 
 ## Description
