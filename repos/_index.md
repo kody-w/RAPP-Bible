@@ -2,7 +2,7 @@
 
 Every RAPP-ecosystem repo the Bible knows about, grouped by the families in
 [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json)
-v1.0.0 `repos`. Each entry links to the Bible one-pager (which links upstream).
+v1.1.0 `repos`. Each entry links to the Bible one-pager (which links upstream).
 
 > The single most important "repo" is not a repo at all — it is **one agent**.
 > See [`THE_ONE_AGENT.md`](../THE_ONE_AGENT.md): drop `@rapp/rapp` (`rapp_agent.py`)
@@ -112,4 +112,4 @@ Example twins built on top of the kernel. The Bible links them; it does not mirr
 
 ---
 
-*Grouped per `ecosystem-spec.json` v1.0.0 `repos`. If a repo here disagrees with its upstream README, upstream wins.*
+*Grouped per `ecosystem-spec.json` v1.1.0 `repos`. If a repo here disagrees with its upstream README, upstream wins.*

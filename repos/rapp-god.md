@@ -14,7 +14,7 @@ It is also **leg two of the drift triangle**: it hosts `ecosystem-spec.json` (th
 
 ## What it provides
 
-- `api/v1/ecosystem-spec.json` — the canonical machine spec this Bible renders (v1.0.0).
+- `api/v1/ecosystem-spec.json` — the canonical machine spec this Bible renders (v1.1.0).
 - `api/v1/registry.json` — every part + version, content-addressed.
 - The drift observatory surface — what version of what lives where.
 

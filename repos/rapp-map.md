@@ -14,7 +14,7 @@ It is **leg three of the drift triangle**: it carries a byte-identical copy of `
 
 ## What it provides
 
-- `ecosystem-spec.json` — the byte-identical spec mirror (v1.0.0).
+- `ecosystem-spec.json` — the byte-identical spec mirror (v1.1.0).
 - `neurons.json` — the neuron mesh (`rapp-neuron-mesh/1.0`), indexed by schema version.
 - The part-to-repo index.
 

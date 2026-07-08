@@ -1,6 +1,6 @@
 # The drift triangle — how four representations stay one truth
 
-> *Renders the `drift_triangle` and `mirrors` sections of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.0.0.*
+> *Renders the `drift_triangle` and `mirrors` sections of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.0.*
 
 The RAPP ecosystem is described in **four independent places at once** — on purpose. If there were one description, it could silently rot and nobody would notice. With four, any divergence between them *is* drift, and drift is mechanically detectable.
 
@@ -35,7 +35,7 @@ The `verify` action (and the `ecosystem-sync` swarm) runs these:
 
 1. **`sha256(rapp-god/ecosystem-spec.json) == sha256(rapp-map/ecosystem-spec.json)`** — the two independent mirrors must match byte-for-byte. Any divergence between them is drift.
 2. **`rapp_agent.py` action enum ⊇ `ecosystem-spec.json.required_actions`** — the agent must implement at least every required action. The spec can describe a capability; if the agent's enum doesn't carry the action, the capability is a `to_close` gap, not a live feature.
-3. **`RAPP-Bible spec_version == ecosystem-spec.json.version`** — the Bible must be pinned to the spec it renders. **This Bible renders v1.0.0.**
+3. **`RAPP-Bible spec_version == ecosystem-spec.json.version`** — the Bible must be pinned to the spec it renders. **This Bible renders v1.1.0.**
 4. **Every `capability_domain` capability tagged `native` maps to a live action in the agent's enum** — no native capability is claimed without a real action behind it.
 
 ---
@@ -62,8 +62,8 @@ This is the governance contract in one sentence: **the truth is described four t
 ## What this means for you, the reader
 
 - If you want the **freshest** machine truth, fetch either mirror and diff them — if they match, you have canon.
-- If you want the **human** truth, you're reading it. This Bible is pinned to `ecosystem-spec.json` **v1.0.0**.
+- If you want the **human** truth, you're reading it. This Bible is pinned to `ecosystem-spec.json` **v1.1.0**.
 - If you find this Bible disagreeing with the spec JSON, **the JSON wins** and this Bible is the leg that drifted — open an issue or a PR against [kody-w/RAPP-Bible](https://github.com/kody-w/RAPP-Bible).
 - If you are building on the ecosystem and add a capability, the loop is: ship the agent action → bump the spec → publish to both mirrors → re-pin the Bible → `verify` green.
 
-*Authority: `ecosystem-spec.json` v1.0.0 `drift_triangle` + `mirrors`. The `verify` action is the executable form of this page.*
+*Authority: `ecosystem-spec.json` v1.1.0 `drift_triangle` + `mirrors`. The `verify` action is the executable form of this page.*

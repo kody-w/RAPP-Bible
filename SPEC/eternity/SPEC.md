@@ -7,7 +7,7 @@
 A second, broader rappid namespace than the door-bound `rapp-rappid/2.0` (`rappid:v2:<kind>:@<owner>/<repo>:<32hex>@github.com/...`). The Eternity id is **not** door/owner/repo-bound.
 
 ## Canonical form
-`rappid:<slug>:<64hex>` — 256-bit (real SHA-256), keypair-bound. The **64-hex is THE join key**.
+`rappid:<slug>:<64hex>` — 256-bit (real SHA-256), a PKI-free content-address; **keypair-binding is OPTIONAL** (signatures live in an add-on `sig_suite` record field, never a required PKI). The **64-hex is THE join key**.
 
 - `slug` — the kind. Defined kinds today: `moment` (a living holographic Moment), `keeper` (a signing-key identity), `dimension` (a world/organism, e.g. the RAPP Commons).
 - `<64hex>` — `sha256("<slug>:" + <eternal-source>)`. For a Moment: the source is its spacetime `pk` (`sky·<utc_ms>` or `<geohash>·<utc_ms>`), so the id is deterministic and eternal — the address regenerates the organism with zero lookup.
