@@ -1,6 +1,6 @@
 # Capabilities — what the ecosystem can do, honestly
 
-> *Renders the `capability_domains` of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.0 for a human reader.*
+> *Renders the `capability_domains` of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.1 for a human reader.*
 
 This page is the honest coverage map. Every capability in the RAPP ecosystem falls into one of three buckets:
 
@@ -349,4 +349,4 @@ Entirely **specialist-owned** by [rapp-mcp](https://github.com/kody-w/rapp-mcp).
 
 A `to_close` tag is not a broken promise — it is the spec being honest about which actions are planned vs. live. The four-leg drift triangle exists precisely so that when an action *does* ship, `action=verify` confirms the agent's enum now matches the spec, and the gap closes for real. See [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
 
-*Authority: `ecosystem-spec.json` v1.1.0 `capability_domains`. This page is the human rendering; the JSON is canonical.*
+*Authority: `ecosystem-spec.json` v1.1.1 `capability_domains`. This page is the human rendering; the JSON is canonical.*
