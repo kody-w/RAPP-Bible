@@ -2,7 +2,7 @@
 
 > *If you only read one file in this Bible, read this one.*
 >
-> **This document renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.0** (the single canonical machine description, mirrored byte-identical in [rapp-god](https://github.com/kody-w/rapp-god) and [rapp-map](https://github.com/kody-w/rapp-map)) for a human reader. Where this prose and that JSON disagree, the JSON wins and this file is wrong — fix this file.
+> **This document renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.1** (the single canonical machine description, mirrored byte-identical in [rapp-god](https://github.com/kody-w/rapp-god) and [rapp-map](https://github.com/kody-w/rapp-map)) for a human reader. Where this prose and that JSON disagree, the JSON wins and this file is wrong — fix this file.
 
 RAPP — the **Rapid Agent Prototyping Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you have to adopt.
 
@@ -79,7 +79,7 @@ Every organism has one global identity, the **rappid**. The current canonical fo
 rappid:@<owner>/<slug>:<64hex>
 ```
 
-- `<64hex>` is the SHA-256 of the string `<owner>/<slug>`.
+- `<64hex>` is a **keyless identity hash** — the SHA-256 of the master public key for keyed organisms, or a stable UUID/commit-derived hash for keyless ones — computed **independent of the slug** (it is the join key, **never** the SHA-256 of `<owner>/<slug>`).
 - The `@<owner>/<slug>` segment is **self-locating** — it points directly at `github.com/<owner>/<slug>`.
 - The **kind** (`twin`, `neighborhood`, `operator`, …) lives in the `rappid.json` record, **not** in the string.
 
@@ -89,13 +89,14 @@ Example:
 rappid:@kody-w/heimdall:5f3c...e21a
 ```
 
-Mint a rappid in Python:
+Mint a rappid in Python (keyless organism — the hash is independent of the slug):
 
 ```python
-import hashlib
-owner_repo = "kody-w/heimdall"
-hex64 = hashlib.sha256(owner_repo.encode()).hexdigest()
-rappid = f"rappid:@{owner_repo}:{hex64}"
+import hashlib, uuid
+owner_repo = "kody-w/heimdall"                        # location sugar only
+hex64 = hashlib.sha256(uuid.uuid4().bytes).hexdigest()  # keyless: stable UUID-derived;
+                                                        # keyed: sha256(master_pubkey_SPKI)
+rappid = f"rappid:@{owner_repo}:{hex64}"              # minted once, preserved on every re-hatch
 ```
 
 Legacy `rappid:v2:…` strings are **read forever and canonicalized on read** (`tools/door_address.py::canonicalize_rappid`) — never re-minted. There is exactly **one** parser (`door_from_rappid`); per-consumer parsers are forbidden (Article XLVI). Invalid rappids raise an error and are reissued, never patched.
@@ -142,6 +143,7 @@ The cartridge family (all `brainstem-egg/*` or `rapp-egg/*`):
 | `brainstem-egg/2.3-session` | a live multi-participant tether, made portable |
 | `brainstem-egg/2.3-neighborhood` *(planned)* | a neighborhood gate, made portable |
 | `brainstem-egg/2.3-estate` *(planned)* | an operator's whole multi-tier identity, portable across substrates |
+| `brainstem-egg/2.3-cubby` | a member's private estate slice / cubby, portable + offline (per §8) |
 
 One universal hatcher (`@rapp/egg_hatcher`) introspects the manifest and routes by kind; it **refuses** on unknown kinds rather than guessing.
 

@@ -14,24 +14,23 @@ If you are writing a planter, an estate agent, a federation walker, a holocard r
 
 ## 1. The rappid IS the URL
 
-The canonical v2 rappid format:
+The **consolidated** rappid format (locked 2026-06-03):
 
 ```
-rappid:v2:<kind>:@<owner>/<repo>:<32-hex-no-dashes>@github.com/<owner>/<repo>
+rappid:@<owner>/<slug>:<64hex>
 ```
 
-The `<owner>/<repo>` segment appears **twice** by design — first as the abbreviated identity reference, then as the full origin pin. Both MUST be the same string. A rappid where they disagree is invalid and MUST be rejected (Article XLVI.5).
-
-From this string alone, by **string parsing** (not lookup, not config, not env), you derive:
+`@<owner>/<slug>` is the **location** — `github.com/<owner>/<slug>` is the door. From this string alone, by **string parsing** (not lookup, not config, not env), you derive every door URL in §2:
 
 | Field | How |
 |---|---|
-| `kind` | The token between `rappid:v2:` and `:@` |
-| `owner` | Everything after `@` and before `/` in the first segment |
-| `repo` | Everything after `/` and before `:` in the first segment |
-| `door_type` | `"front_door"` if `kind == "twin"`, else `"gate"` (XLVI.2) |
+| `owner` | Everything after `@` and before `/` |
+| `repo` (`slug`) | Everything after `/` and before the final `:` |
+| `hash` | The 64-hex after the final `:` — the 256-bit identity / join key |
 
-**Valid kinds** (frozen as of 2026-05-09): `twin`, `neighborhood`, `ant-farm`, `braintrust`, `workspace`, `hatched`, `rapplication`, `prototype`, `operator`. Adding a new kind requires a CONSTITUTION amendment because every consumer derives behavior from this token.
+`kind` (→ `door_type`) is **no longer in the string** — it lives in the door's `rappid.json` record (fetch the `identity` URL in §2). The pure-string `door_from_rappid()` returns the URLs (location) for any door; `kind`/`door_type` come from the record (or, for a legacy v2 string, are read inline). Legacy forms — v2 `rappid:v2:<kind>:@<owner>/<repo>:<32hex>@github.com/<owner>/<repo>` and bare UUIDs — are read-compatible via `door_address.py` (`canonicalize_rappid`).
+
+**Valid kinds** (frozen as of 2026-05-09; **amended 2026-06-02** per CONSTITUTION Art. XLVI.2 to ratify the single-presence kinds already shipped across the kernel, RAR, and RAPP-Network): single AI presences → `front_door`: `twin`, `operator`, `personal`, `project`, `memorial`, `pre-founder`, `mirror`, `experiment`, `custom`; community spaces you enter → `gate`: `neighborhood`, `ant-farm`, `braintrust`, `workspace`, `hatched`, `rapplication`, `prototype`, `place`. Adding a new kind requires a CONSTITUTION amendment because every consumer derives behavior from this token; the canonical machine-readable set is `VALID_KINDS` / `_FRONT_DOOR_KINDS` in `tools/door_address.py` (the one parser consumers MUST import).
 
 ---
 
@@ -43,7 +42,7 @@ Every planted door MUST be reachable at these URLs. The planter MUST emit each o
 |---|---|---|---|
 | 1 | `repo` | `https://github.com/<owner>/<repo>` | all (the canonical browsing URL) |
 | 2 | `front` | `https://<owner>.github.io/<repo>/` | all (the heimdall snapshot — the operator-facing chat surface) |
-| 3 | `identity` | `https://raw.githubusercontent.com/<owner>/<repo>/main/rappid.json` | all (`rapp-rappid/2.0`) |
+| 3 | `identity` | `https://raw.githubusercontent.com/<owner>/<repo>/main/rappid.json` | all (`rapp-rappid/2.0`, which defers to `rapp-eternity/1.0` — the sole identity standard) |
 | 4 | `holocard` | `https://raw.githubusercontent.com/<owner>/<repo>/main/card.json` | all (`rappcards/1.1.2`) |
 | 5 | `holo_md` | `https://raw.githubusercontent.com/<owner>/<repo>/main/holo.md` | all (the friendly entry doc) |
 | 6 | `avatar` | `https://raw.githubusercontent.com/<owner>/<repo>/main/holo.svg` | all (procedural sprite) |
@@ -68,7 +67,7 @@ Per Article XLVI.3, each entry stores **only**:
 
 ```json
 {
-  "rappid": "rappid:v2:twin:@owner/repo:hex@github.com/owner/repo",
+  "rappid": "rappid:@owner/repo:hex",
   "added_at": "2026-05-09T00:00:00Z",
   "via": "created" | "scan" | "manual" | "import" | "published-by-other"
 }
@@ -84,7 +83,7 @@ This is the constitutional answer to *"don't do all of these exception things."*
 {
   "schema": "rapp-estate/1.1",
   "owner": {
-    "rappid": "rappid:v2:operator:@<github>/<their-twin-or-brainstem>:hex@github.com/<github>/...",
+    "rappid": "rappid:@<github>/<their-twin-or-brainstem>:hex",
     "github": "<github-handle>"
   },
   "created": [{ "rappid": "...", "added_at": "...", "via": "created" }],
@@ -110,7 +109,7 @@ A consumer MUST be able to discover any door, and any user's full estate, with `
 
 ```bash
 # From the rappid, parse <owner>/<repo>:
-RAPPID='rappid:v2:twin:@kody-w/echo-brainstem:abc...@github.com/kody-w/echo-brainstem'
+RAPPID='rappid:@kody-w/echo-brainstem:abc...'
 OWNER_REPO=$(echo "$RAPPID" | sed 's|.*:@\([^:]*\):.*|\1|')
 
 # Fetch identity, holocard, holo.md, etc.:
@@ -163,10 +162,26 @@ def door_from_rappid(rappid: str) -> dict:
       }
 
     Raises:
-      InvalidRappidError if the string is not a valid v2 rappid OR if the
-      <owner>/<repo> appears differently in the two segments.
+      InvalidRappidError only if the string is genuinely malformed (no parseable
+      @<owner>/<slug>:<hash> and no canonicalizable legacy form). It MUST ACCEPT
+      the consolidated Eternity form `rappid:@<owner>/<slug>:<64hex>` (one
+      location segment) and MUST canonicalize every legacy form on read (v2
+      `rappid:v2:<kind>:@<owner>/<repo>:<32hex>@github.com/...`, bare UUID, bare
+      `rappid:<slug>:<64hex>`) via `canonicalize_rappid()` before deriving — it
+      MUST NOT reject a rappid merely for "not being v2".
     """
 ```
+
+> **Amendment (2026-07-08, per CONSTITUTION Art. XXXIV.1 lock 2026-06-03).** An
+> earlier draft of this Raises clause read "*if the string is not a valid v2
+> rappid OR if the `<owner>/<repo>` appears differently in the two segments*."
+> That is superseded: the canonical consolidated Eternity form has ONE
+> `@<owner>/<slug>` segment (not two) and is not a "v2 rappid", so the old clause
+> would reject every currently-mintable rappid. The contract now validates the
+> Eternity form and read-forever-canonicalizes legacy v2 (never emitting it),
+> matching the reference `tools/door_address.py` (`parse_rappid` /
+> `canonicalize_rappid`). Identity is `rapp-eternity/1.0` — the sole identity
+> standard, to which `rapp-rappid/2.0` defers.
 
 Implementation lives at `tools/door_address.py`. Imported by `plant_seed_agent.py`, `estate_agent.py`, and any future federation/discovery consumer. One implementation, one contract — no per-consumer reinventions.
 
@@ -286,7 +301,7 @@ The estate cartridge is the `brainstem-egg/2.3-estate` member of the egg family 
   "schema": "brainstem-egg/2.3-estate",
   "scale":  "estate",
   "rapp_egg_version": "2.0",
-  "owner_rappid": "rappid:v2:operator:@<gh>/<their-brainstem>:hex@github.com/<gh>/...",
+  "owner_rappid": "rappid:@<gh>/<their-brainstem>:hex",
   "estate_snapshot_at": "<iso8601>",
   "members": [ /* see 7.6.2 */ ]
 }
@@ -374,6 +389,8 @@ Authority: [`pages/docs/PUBLIC_PRIVATE_BOUNDARY.md`](./PUBLIC_PRIVATE_BOUNDARY.m
 - **`rapp_brainstem/agents/estate_agent.py`** — the local-first agent that reads/writes the estate.
 - **`rapp_brainstem/agents/plant_seed_agent.py`** — the planter that emits the Door URL Set on every new plant.
 - **`rapp_brainstem/agents/twin_egg_hatcher_agent.py`** — the universal hatcher dispatched per `rapp-egg/2.0` scale (twin / brainstem / neighborhood / swarm / factory / industry / estate).
+
+> **Serving-surface note (2026-07-08).** The estate / plant / hatch capabilities are canonically driven as **actions on the one agent** (`@rapp/rapp` — e.g. `estate`, `door`, `whoami`, `hatch`) plus RAR-distributed specialists, not as standalone kernel files at fixed paths. Two hatcher layers coexist (per `pages/docs/SPEC.md` §18.10 / `ECOSYSTEM.md` §15.5): the kernel `.egg` **kind**-router `egg_hatcher_agent.py` and the `rapp-egg/2.0` **scale**-dispatcher `@kody/twin_egg_hatcher` (`twin_egg_hatcher_agent.py`, RAR PR #98, the canonical hatcher per §7.5.2) — an additive superset, not a competitor. Treat the `*_agent.py` filenames above as role labels; resolve the live serving agent through RAR / the one-agent action surface.
 - **[[The Federated Twin Egg Hatcher Pattern]]** — the kernel-side pattern that makes neighborhood-scale federations operable; canonical home of the four-twin AIBAST worked example.
 - **[[NEIGHBORHOOD_PROTOCOL]] §5e** — the on-the-wire format for neighborhood-scale cartridges; §7.5.2 of this spec is the addressing-layer view of the same artifact.
 - **[[The Swarm Estate]]** — the cryptographic backing (M/S/U/D cross-signing) that travels inside each member's `.brainstem_data/` when an estate cartridge migrates substrates.

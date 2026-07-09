@@ -39,7 +39,7 @@ project_twin_agent.py
 Hatching a project twin:
 1. Writes the embedded `_PROJECT_WORKSPACE_AGENT_SRC` to `<target>/agents/project_workspace_agent.py`.
 2. Copies the global brainstem's kernel files (`brainstem.py`, `local_storage.py`, `start.sh`, `index.html`, etc.) verbatim.
-3. Mints / reuses a `rapp-rappid/2.0` per `kody-w/RAPP/pages/docs/ESTATE_SPEC.md` §1.
+3. Mints / reuses the consolidated **Eternity** rappid `rappid:@<owner>/<slug>:<64hex>` (record schema `rapp-rappid/2.0`; `kind: "project"` lives in the record, not the string) per `kody-w/RAPP/pages/docs/ESTATE_SPEC.md` §1 — never a legacy `v2:` string.
 4. Writes `manifest.json` (§6 below) with the chosen `port_hint`.
 5. Symlinks `~/.rapp/twins/<rappid-hash>/` to the project anchor so any twin-aware tool finds it.
 
@@ -52,13 +52,13 @@ Per [`TWIN_LIFECYCLE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/do
 ```
 ~/.brainstem/                              — operator's brainstem + identity
   rappid.json                              — rapp-rappid/2.0 (operator)
-  estate.json                              — rapp-estate/1.1 (door catalog)
+  estate.json                              — `rapp-estate/1.1` (door catalog)
   src/rapp_brainstem/                      — the global brainstem
     agents/project_twin_agent.py           — THIS agent (the network's one drop-in)
     agents/*_agent.py                      — other agents the operator has
 
 ~/.rapp/                                   — device-wide twin estate root
-  twins/<32-hex-rappid-hash>/              — one dir per twin (symlink for project twins)
+  twins/<rappid-hash>/                     — one dir per twin (symlink for project twins)
     rappid.json                            — rapp-rappid/2.0
     manifest.json                          — rapp-twin-manifest/1.0  (§6)
     HATCH_RECEIPT.json                     — provenance
@@ -72,24 +72,24 @@ Per [`TWIN_LIFECYCLE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/do
 
 The canonical twin path is `~/.rapp/twins/<hash>/`. For project twins, that path is a **symlink** to the project anchor. Tools that scan `~/.rapp/twins/` see project twins exactly like egg-hatched ones.
 
-## 5. Identity (compat with `rapp-rappid/2.0`)
+## 5. Identity (`rapp-rappid/2.0`, Eternity form)
 
-Every project twin's rappid follows the upstream v2 format verbatim:
+Every project twin's rappid is the consolidated **Eternity** form (CONSTITUTION Art. XXXIV.1/XXXVI.1, locked 2026-06-03; identity standard `rapp-eternity/1.0`, to which the `rapp-rappid/2.0` record schema defers), verbatim from upstream [`ESTATE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/docs/ESTATE_SPEC.md) §1:
 
 ```
-rappid:v2:project:@<owner>/<repo>:<32-hex>@github.com/<owner>/<repo>
+rappid:@<owner>/<slug>:<64hex>
 ```
 
 - `<owner>` is derived from `git remote get-url origin` when available; falls back to the operator's `github` field in `~/.brainstem/rappid.json`; falls back to the literal string `local`.
-- `<repo>` is derived from the same remote; falls back to `<project-slug>-brainstem`.
-- `<32-hex>` is `uuid.uuid4().hex` minted at first hatch and **preserved verbatim** on every re-hatch (re-hatching is idempotent — same project path, same rappid).
+- `<slug>` (the repo) is derived from the same remote; falls back to `<project-slug>-brainstem`.
+- `<64hex>` is a **keyless identity hash** — `sha256` of a fresh UUID (keyless organisms use a stable UUID/commit-derived hash per CONSTITUTION Art. XXXVI.1), computed **independent of the slug**; it is **never** `sha256("<owner>/<slug>")`. The `@<owner>/<slug>` is location sugar; the hash is the sole join key, and `kind` (`"project"`) lives in the `rappid.json` RECORD, **not** the string. Re-hatch is idempotent because it **reuses the stored `rappid.json`** (the hash is preserved, legacy v2 canonicalized on read) — not because the hash is a function of the location.
 - `parent_rappid` is the operator's rappid from `~/.brainstem/rappid.json::rappid`.
+
+**Legacy v2 is read-only.** A pre-existing `rappid:v2:project:@<owner>/<repo>:<32hex>@github.com/<owner>/<repo>` string is READ forever and **canonicalized on read** to the Eternity form above (hash preserved) — **never emitted**. `project_twin_agent.py` canonicalizes any legacy rappid it re-hatches; `door_address.py::canonicalize_rappid` is the reference.
 
 The rappid IS the global address per [`ESTATE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/docs/ESTATE_SPEC.md) §1. No URL has to resolve for the rappid to be valid. **This is the load-bearing offline guarantee.**
 
-`kind: "project"` is in use across `kody-w/RAPP` and this network (the AIBAST twin and others ship with it). The constitutionally-frozen list of valid kinds is in [`ESTATE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/docs/ESTATE_SPEC.md) §1.
-
-**Known drift signal as of this draft:** the upstream frozen list reads `twin, neighborhood, ant-farm, braintrust, workspace, hatched, rapplication, prototype, operator`. `project` is not on that list, but real twins on operator devices ship `kind: "project"` today. Resolution requires either (a) an amendment to add `project` to the frozen list upstream, or (b) this network adopting `workspace` (the closest existing kind). `scripts/cross_validate.py` will continue to WARN on this until one side moves.
+`kind: "project"` is a **ratified** `front_door` kind (ESTATE_SPEC §1, amended 2026-06-02 per CONSTITUTION Art. XLVI.2 to ratify the single-presence kinds already shipped across the kernel, RAR, and this network); the AIBAST twin and others ship with it. The constitutionally-frozen list of valid kinds is in [`ESTATE_SPEC.md`](https://github.com/kody-w/RAPP/blob/main/pages/docs/ESTATE_SPEC.md) §1.
 
 ## 6. Manifest contract (`rapp-twin-manifest/1.0`)
 
@@ -98,18 +98,18 @@ Every project twin's workspace MUST contain `manifest.json`:
 ```json
 {
   "schema": "rapp-twin-manifest/1.0",
-  "rappid": "rappid:v2:project:@kody-w/example-co-brainstem:8aeba5547a4b4b4a93e6328aaf31eeef@github.com/kody-w/example-co-brainstem",
-  "hash": "8aeba5547a4b4b4a93e6328aaf31eeef",
-  "name": "example-co",
+  "rappid": "rappid:@kody-w/bchydro-brainstem:689266b7f523c61c6e9a331c02c745e4bef08a97c6a3f8c4db019edd582a42f0",
+  "hash": "689266b7f523c61c6e9a331c02c745e4bef08a97c6a3f8c4db019edd582a42f0",
+  "name": "bchydro",
   "kind": "project",
   "port_hint": 7074,
-  "anchor_path": "/Users/.../rapp_projects/example-co/.brainstem/src/rapp_brainstem",
+  "anchor_path": "/Users/.../rapp_projects/bchydro/.brainstem/src/rapp_brainstem",
   "url": "http://localhost:7074",
   "updated_at": "2026-05-21T15:58:41Z"
 }
 ```
 
-`port_hint` is how the canonical Twin agent (per `NEIGHBORHOOD_PROTOCOL.md` §6) boots the twin. The auto-port-pick algorithm scans every `~/.rapp/twins/*/manifest.json::port_hint` and picks the next free port starting at `7073` — no parallel port registry.
+`port_hint` is how the canonical Twin agent boots the twin. The auto-port-pick algorithm is owned by this repo (this §6 / `project_twin_agent.py::_pick_port`): it scans every `~/.rapp/twins/*/manifest.json::port_hint` and picks the next free port starting at `7073` — no parallel port registry. (Upstream `NEIGHBORHOOD_PROTOCOL.md` §6 covers twin-chat, the social layer — not port allocation.)
 
 ## 7. Transport (`rapp-twin-transport/1.0`)
 
@@ -128,6 +128,8 @@ The agent's surface, by verb:
 | `await_job` | `job_id?`, `timeout?` | Blocks until `complete + failed == total` or `timeout`. |
 
 **`message` is never templated or inspected.** A user (or the global LLM) types whatever they want to ask the twin; the agent relays it verbatim. The twin's own LLM + the twin's own agents decide what to do.
+
+This transport is itself an instance of **Chat Is The Only Wire** (`kody-w/RAPP` [`CONSTITUTION.md`](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md) Article XXV): each twin's `127.0.0.1:<port>/chat` is the universal interface, and every verb above is just a Layer-2 caller relaying the same verbatim chat envelope. The global brainstem's `ProjectTwin` verbs are therefore **not** a new unit or taxonomy — they are a relay, exactly like an MCP host. An MCP client over stdio (via [`kody-w/rapp-mcp`](https://github.com/kody-w/rapp-mcp)'s `rapp_brainstem_mcp.py`, `rapp-mcp-spec/1.0`; or the content-addressed static profile `rapp-static-mcp/1.0`) is a peer Layer-2 caller of the same `/chat` — MCP is transport realizing this wire, not a parallel abstraction. See `kody-w/RAPP` [`ECOSYSTEM.md`](https://github.com/kody-w/RAPP/blob/main/ECOSYSTEM.md) for the ecosystem framing.
 
 ## 8. Job state (`rapp-project-twin-job/1.0`)
 
