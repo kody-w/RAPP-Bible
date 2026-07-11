@@ -2,11 +2,9 @@
 
 **Tier 2** — Generic single-file hatcher for organism eggs
 
-> **⚠ Not a canonical ecosystem repo (drift-reconciliation note, 2026-07-08).** `twin-egg-hatcher` is **not** listed in the canonical [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) `repos` map (v1.1.1) — the winning authority. The egg-hatch capability is served by the RAR agent **`@rapp/egg_hatcher`** (`egg_hatcher_agent.py`) via the native `hatch` action, not by this repo. This Bible page is an out-of-catalog overview; if the ecosystem intends to promote this repo, it must first enter `ECOSYSTEM_MAP.md` + `ecosystem-spec.json`. Routed to the `ecosystem-sync` swarm.
-
 - Canonical: https://github.com/kody-w/twin-egg-hatcher
 - Default branch: `main`
-- Last updated: 2026-05-18T22:03:50Z
+- Last updated: 2026-06-08T01:36:03Z
 - License: MIT
 
 ## Description
