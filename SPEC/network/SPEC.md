@@ -98,12 +98,12 @@ Every project twin's workspace MUST contain `manifest.json`:
 ```json
 {
   "schema": "rapp-twin-manifest/1.0",
-  "rappid": "rappid:@kody-w/bchydro-brainstem:689266b7f523c61c6e9a331c02c745e4bef08a97c6a3f8c4db019edd582a42f0",
+  "rappid": "rappid:@kody-w/example-co-brainstem:689266b7f523c61c6e9a331c02c745e4bef08a97c6a3f8c4db019edd582a42f0",
   "hash": "689266b7f523c61c6e9a331c02c745e4bef08a97c6a3f8c4db019edd582a42f0",
-  "name": "bchydro",
+  "name": "example-co",
   "kind": "project",
   "port_hint": 7074,
-  "anchor_path": "/Users/.../rapp_projects/bchydro/.brainstem/src/rapp_brainstem",
+  "anchor_path": "/Users/.../rapp_projects/example-co/.brainstem/src/rapp_brainstem",
   "url": "http://localhost:7074",
   "updated_at": "2026-05-21T15:58:41Z"
 }
