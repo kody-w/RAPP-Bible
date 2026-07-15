@@ -35,7 +35,7 @@ The `verify` action (and the `ecosystem-sync` swarm) runs these:
 
 1. **`sha256(rapp-god/ecosystem-spec.json) == sha256(rapp-map/ecosystem-spec.json)`** — the two independent mirrors must match byte-for-byte. Any divergence between them is drift.
 2. **`rapp_agent.py` action enum ⊇ `ecosystem-spec.json.required_actions`** — the agent must implement at least every required action. The spec can describe a capability; if the agent's enum doesn't carry the action, the capability is a `to_close` gap, not a live feature.
-3. **`RAPP-Bible spec_version == ecosystem-spec.json.version`** — the Bible must be pinned to the spec it renders. **This Bible renders v1.2.0, sha256 `f1ddcf7e1302a82195fa682ad94140d0d066bbe60647befc5030ec5b50507e9e`.**
+3. **`RAPP-Bible spec_version == ecosystem-spec.json.version`** — the Bible must be pinned to the spec it renders. **This Bible renders v1.2.0, sha256 `f1ddcf7e1302a82195fa682ad94140d0d066bbe60647befc5030ec5b50507e9e`.** (v1.2.0's headline addition is the `lexicon` pointer: `LEXICON.md` at the species root is the canon language file — Constitution Article LII; it seals at rapp-body genesis.)
 4. **Every `capability_domain` capability tagged `native` maps to a live action in the agent's enum** — no native capability is claimed without a real action behind it.
 
 ---
