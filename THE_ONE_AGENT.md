@@ -1,6 +1,6 @@
 # The one agent — `rapp_agent.py` / `@rapp/rapp`
 
-> *Renders the `the_one_agent`, `required_actions`, `operator_journeys`, and `specialist_agents` sections of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.1.*
+> *Renders the `the_one_agent`, `required_actions`, `operator_journeys`, and `specialist_agents` sections of [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0.*
 
 There is one agent that makes the **entire** RAPP ecosystem reachable through natural language. Drop a single file — `rapp_agent.py`, published as **`@rapp/rapp`** in [RAR](https://github.com/kody-w/RAR) — into a brainstem's `agents/` directory, and an operator can orient in the ecosystem, bootstrap their identity and a fresh organism, operate every core scale, record lineage, and **install any specialist agent** for everything deeper. All through conversation.
 
@@ -162,4 +162,4 @@ This is the whole point: the one agent is the front of the line. It knows what e
 
 ---
 
-*Authority: `ecosystem-spec.json` v1.1.1 (`the_one_agent` + `required_actions` + `operator_journeys` + `specialist_agents`). The agent's live action enum is the executable contract; this page renders it for a human reader.*
+*Authority: `ecosystem-spec.json` v1.2.0 (`the_one_agent` + `required_actions` + `operator_journeys` + `specialist_agents`). The agent's live action enum is the executable contract; this page renders it for a human reader.*

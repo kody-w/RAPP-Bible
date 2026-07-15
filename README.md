@@ -2,7 +2,7 @@
 
 **One repo you can read if it's the only thing you have, and understand the entire RAPP ecosystem end-to-end** — what it is, why it exists, how every piece fits, how to use it, the one agent, the schemas, the repos, the journeys.
 
-> **Version note.** This Bible **renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.1.1** — the single canonical machine description of the ecosystem, published byte-identical to two grail mirrors ([rapp-god](https://github.com/kody-w/rapp-god) + [rapp-map](https://github.com/kody-w/rapp-map)) and rendered here for a human reader. Where this Bible and that JSON disagree, **the JSON wins** and the Bible is the leg that drifted (see [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)).
+> **Version note.** This Bible **renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0** — the single canonical machine description of the ecosystem, published byte-identical to two grail mirrors ([rapp-god](https://github.com/kody-w/rapp-god) + [rapp-map](https://github.com/kody-w/rapp-map)) and rendered here for a human reader. Where this Bible and that JSON disagree, **the JSON wins** and the Bible is the leg that drifted (see [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md)).
 
 - Site: https://kody-w.github.io/RAPP-Bible/
 - Repo: https://github.com/kody-w/RAPP-Bible
@@ -92,7 +92,7 @@ The entire ecosystem is reachable through **one single-file agent**: `rapp_agent
 
 ## How the truth stays one truth
 
-The ecosystem is described in four independent places — the one agent's action enum, rapp-god's spec, rapp-map's byte-identical mirror, and this Bible — so that any divergence between them *is* detectable drift. The agent's `action=verify` self-checks all four legs; the `ecosystem-sync` swarm re-derives the spec from the live ecosystem and reconciles. No single point can silently rot. This Bible is pinned to **v1.1.1**. See [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
+The ecosystem is described in four independent places — the one agent's action enum, rapp-god's spec, rapp-map's byte-identical mirror, and this Bible — so that any divergence between them *is* detectable drift. The agent's `action=verify` self-checks all four legs; the `ecosystem-sync` swarm re-derives the spec from the live ecosystem and reconciles. No single point can silently rot. This Bible is pinned to **v1.2.0**. See [`DRIFT_TRIANGLE.md`](DRIFT_TRIANGLE.md).
 
 (This replaces the older "two sources of truth" framing: there are four legs, and they cross-check each other.)
 
