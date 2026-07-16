@@ -4,7 +4,7 @@
 >
 > **This document renders [`ecosystem-spec.json`](https://raw.githubusercontent.com/kody-w/rapp-god/main/api/v1/ecosystem-spec.json) v1.2.0** (the single canonical machine description, mirrored byte-identical in [rapp-god](https://github.com/kody-w/rapp-god) and [rapp-map](https://github.com/kody-w/rapp-map)) for a human reader. Where this prose and that JSON disagree, the JSON wins and this file is wrong — fix this file.
 
-RAPP — the **Rapid Agent Prototyping Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you have to adopt.
+RAPP — the **Rapid Agent Prototype Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you have to adopt.
 
 This page walks the entire ecosystem top to bottom. Every concept here has a deeper page in this Bible; the links point you there.
 

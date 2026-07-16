@@ -28,7 +28,7 @@ Then follow your role:
 
 ## What is RAPP?
 
-RAPP — the **Rapid Agent Prototyping Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you must adopt.
+RAPP — the **Rapid Agent Prototype Platform** — is a way to grow AI organisms that own their own identity, carry their own memory, talk to each other, and run on hardware nobody had to buy. It is "engine, not experience": infrastructure only, no opinionated UI, no workflow you must adopt.
 
 ## The first principle
 
