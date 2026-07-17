@@ -2432,7 +2432,7 @@ preserve vs mint identity.
 Every rappid points at a `parent_rappid`. The chain ascends until it
 reaches the root: **rapp itself** (the prototype digital organism at
 `kody-w/RAPP`), with rappid
-`rappid:@kody-w/RAPP:0b635450c04249fbb4b1bdb571044dec`,
+`rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9`,
 which has `parent_rappid: null` and is the species ancestor.
 
 ```
@@ -3929,3 +3929,72 @@ This article does not specify branding, layout, or surrounding content for the f
 - **`pages/tether.html`** — the universal public payphone (reference implementation of the tether-side reverse contract).
 - **`examples/rapp-commons/index.html`** — reference implementation of the conforming front-gate snippet in a real neighborhood (live at https://kody-w.github.io/rapp-commons/).
 
+## Article LII — One Language: The Lexicon (2026-07-14)
+
+1. **`LEXICON.md` at the repo root is the canon language file** — the Nine Words, the one operator, the one wire, the three shelves, and the assimilation rulings (R1–R9 at ratification). It names and relates; it never overrides: on any conflict this Constitution wins, then `ANTIPATTERNS.md`, then the schema specs, then the Lexicon.
+2. **Amendment protocol.** The Lexicon amends by appending dated rulings (R10, R11, …), each recording `{previous_sha, new_sha}`. Existing lexicon text is never edited, only superseded by a later ruling that names it — the same append-only discipline as this Constitution (Article XXVI).
+3. **The seal.** The rapp-body genesis frame pins the Lexicon's sha256 as `lexicon_sha`. The seal covers every byte; dated snapshots inside the file are sealed as history, not as live state.
+4. **Discovery.** The ecosystem spec (`specs/ecosystem-spec.json` and its mirrors) carries a `lexicon` pointer to this file. No new spec id is minted — the Lexicon names relationships; it does not invent a protocol.
+
+## Article LIII — The Standing Guard: Ratify → Sweep, and the Write-Time Ritual (2026-07-14)
+
+Adopted at the close of the OPUS's sixth movement, with its two lead guards chosen by
+the body's own first race (rapp-body frame 26). Prevention beats detection; these rules
+bind every future canon change:
+
+1. **Ratify → sweep → file, same session.** No canon change — a Constitution amendment,
+   an ecosystem-spec version bump, an invariant re-wording, a new-repo registration —
+   is "done" until the retired form has been hunted ecosystem-wide and every hit carries
+   a `drift()` issue. **"Fixed" is a re-sweep verdict, never a merge event.**
+2. **Waivers pin their canon.** Every drift waiver records the sha256 of the exact canon
+   passage it cites. Any change to a canon surface re-validates all pins; a stale pin
+   auto-reopens its finding. (The waiver-freshness watchdog — the race's winning guard:
+   a green produced by exemptions must expire the moment its justification moves.)
+3. **Frames are gated at write time.** No frame is appended to a biography without
+   passing the pre-append gate: chain integrity, the Article LII lexicon pin, census
+   honesty (gaps recorded, never silently thinner), and the mechanical drift-class
+   screen. On an append-only record, write time is the only moment prevention exists.
+4. **Twins bump together.** A JSON artifact and its MD render change in the same commit,
+   versions matching; reflex lint enforces.
+5. **Registration at birth.** A new repo or spec enters `ecosystem-spec.json` (and the
+   spine registry, if load-bearing) in its first ratified commit.
+6. **Mirror headers are contracts.** A mirror is only edited by re-syncing from its
+   declared upstream of record.
+7. **Frozen bundles get a refresh cadence** — quarterly, or on major canon change — so
+   "frozen" never silently means "wrong".
+
+## Article LIV — One Schema Name: `rapp/1` (2026-07-15)
+
+The `rappid.json` `schema` field carries exactly one canonical value across the
+estate: **`rapp/1`** — the value the RAPP/1 reference implementation
+(`kody-w/rapp-1 · rapp.py`, §12) verifies. This ratifies the name that the whole
+estate's live producers and committed identities already emit, and closes the
+last split between the reference spec and the constitutional-era naming.
+
+1. **`rapp/1` is the schema name; the identity math is unchanged.** `rapp/1` names
+   the `rappid.json` record schema. The underlying content-addressed identity
+   authority (formerly styled `rapp-eternity/1.0`) and the §6.1 Eternity rappid
+   string `rappid:@<owner>/<slug>:<64hex>` are unchanged — `rapp/1` is the single
+   living standard that subsumes them, exactly as [SPEC §1] consolidates the prior
+   scattered specs. No bytes of any rappid, frame, or egg address change.
+2. **`rapp-rappid/2.0` is retired like the v2 string was (Art. XLVI amendment).**
+   It is **never emitted**. A consumer that encounters `rapp-rappid/2.0` (or the
+   older `rapp-rappid/1.1`) in a legacy record **reads it forever** and treats it
+   as `rapp/1`; nothing rejects a record merely for bearing the new name. Producers
+   MUST emit `rapp/1`.
+3. **Additive preservation (Art. XXVI).** The prior declarations that still read
+   `rapp-rappid/2.0` (this Constitution's own XXXIV.7 identity paragraph, the
+   ecosystem-spec, the docs, the frozen `RAPPID_SPEC` excerpts) are preserved, not
+   deleted — but **this Article governs**: where they name the schema, the name is
+   now `rapp/1`.
+4. **Ratify → sweep (Art. LIII.1).** This ratification is not "done" until the
+   retired name has been swept ecosystem-wide: every live producer emits `rapp/1`
+   (already true — the estate's mint/frame/egg pipes were converged 2026-07-15),
+   the declaring specs and teaching docs are updated, the frozen bundles refreshed
+   (Art. LIII.7), and each remaining hit either carries a `drift()` issue or a
+   recorded exception. **Exceptions that do not change (and why):** §7 frames and
+   sealed legacy frames are immutable — their `payload_hash`/`frame_hash` seal the
+   name that was current when written, so history is not rewritten; the drift map's
+   observational findings are regenerated by the mesh sweep, not hand-edited (Art.
+   LIII.6 applies to its mirrors); legacy-handling test fixtures keep the old form
+   they exist to exercise.
