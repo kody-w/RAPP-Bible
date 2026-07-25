@@ -19,14 +19,22 @@ jobs:
       - name: Install pytest
         run: pip install pytest
       - name: Re-mirror specs
+        env:
+          # The PII roster is injected, never committed -- this repo is public
+          # and a committed denylist of customer names IS the disclosure.
+          # Unset => the sanitisers raise (fail closed) rather than silently
+          # redacting nothing. Set with: gh secret set PII_TERMS -R kody-w/RAPP-Bible
+          RAPP_PII_TERMS: ${{ secrets.PII_TERMS }}
         run: python3 scripts/mirror_sync.py
       - name: Rebuild repo pages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RAPP_PII_TERMS: ${{ secrets.PII_TERMS }}
         run: python3 scripts/build_repo_pages.py
       - name: Run tests
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RAPP_PII_TERMS: ${{ secrets.PII_TERMS }}
         run: PYTHONPATH=. pytest tests/ -v
       - name: Open PR on drift
         env:

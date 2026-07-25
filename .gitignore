@@ -4,3 +4,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# PII roster — injected at runtime, NEVER committed (see scripts/pii_terms.py)
+.pii-terms
