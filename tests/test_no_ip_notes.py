@@ -17,16 +17,22 @@ import sys
 from .conftest import REPO_ROOT, iter_committed_files
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "scripts"))
-from mirror_sync import IP_TRIPWIRES  # noqa: E402
+from ip_terms import IPRulesNotConfigured, load_rules  # noqa: E402
 
-ALLOWLIST = {
-    "tests/test_no_ip_notes.py",
-    "scripts/mirror_sync.py",
-}
+# Nothing needs allowlisting any more: the patterns live outside the tree
+# (scripts/ip_terms.py), so neither this test nor the filter carries them as
+# content. A file that had to be exempted from its own tripwire scan was the
+# tell that the list was in the wrong place.
+ALLOWLIST: set[str] = set()
 
 
 def test_no_internal_ip_notes_in_committed_content():
-    patterns = [re.compile(t, re.IGNORECASE) for t in IP_TRIPWIRES]
+    try:
+        tripwires, _ = load_rules()
+    except IPRulesNotConfigured as exc:      # never a silent pass
+        import pytest
+        pytest.skip(f"no rules configured, so this scan would be vacuous: {exc}")
+    patterns = [re.compile(t, re.IGNORECASE) for t in tripwires]
     assert patterns, "tripwire list is empty; this test would pass vacuously"
     violations = []
     for p in iter_committed_files():

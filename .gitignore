@@ -7,3 +7,6 @@ venv/
 
 # PII roster — injected at runtime, NEVER committed (see scripts/pii_terms.py)
 .pii-terms
+
+# Internal-note rules — injected at runtime, NEVER committed (see scripts/ip_terms.py)
+.ip-rules

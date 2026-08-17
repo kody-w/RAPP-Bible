@@ -61,39 +61,12 @@ PII_REPLACEMENTS: list[tuple[str, str]] = [(t, "example-co") for t in load_terms
 # legal posture, or point at a credential-gated legal directory. None of that is
 # platform specification, so it is rewritten on the way in — the surrounding
 # technical sentence is preserved, the internal note is dropped.
-# (regex, replacement) — applied in order, after PII sanitization.
-IP_REDACTIONS: list[tuple[str, str]] = [
-    (
-        r"This is the practical realization of the [^:]*claim: the same identity "
-        r"construct serves",
-        "The same identity construct therefore serves",
-    ),
-    (
-        r"- \*\*Operational anchor for the perpetuity claim\*\*: [^;]*; this article "
-        r"specifies \*how\* perpetuity is operationalized",
-        "- **Operational anchor for perpetuity**: this article specifies *how* "
-        "perpetuity of an AI entity is operationalized",
-    ),
-    (
-        r"licenses \(Article XXXV\), trademarks \(TRADEMARK\.md\), patents \([^)]*\) "
-        r"all reference",
-        "licenses (Article XXXV) and trademarks (TRADEMARK.md) both reference",
-    ),
-    # Whole-line drops: pointers into credential-gated legal directories.
-    (r"(?m)^-[^\n]*wildhaven-ceo/legal[^\n]*\n", ""),
-]
-
-# Anything still matching these after redaction means an internal note reached
-# the mirror in a shape the rules above did not anticipate. Fail closed and let
-# a human look, rather than publish it and find out later.
-IP_TRIPWIRES: list[str] = [
-    r"v4 patent",
-    r"patent claim language",
-    r"wildhaven-ceo/legal",
-    r"WH-20\d\d-\d+",
-    r"provisional patent",
-    r"\b506590\b",
-]
+#
+# The RULES are injected, never committed. A committed list of the exact
+# strings this filter suppresses is a better search index than the notes it
+# removes — the denylist becomes the disclosure. Same argument, and the same
+# fail-closed shape, as the PII roster above. See scripts/ip_terms.py.
+from ip_terms import load_rules  # rules are injected, never committed
 
 
 class InternalNoteLeaked(RuntimeError):
@@ -103,14 +76,15 @@ class InternalNoteLeaked(RuntimeError):
 def redact_internal_notes(text: str, where: str = "<text>") -> str:
     """Drop internal legal/IP annotations from mirrored upstream content."""
     import re
+    tripwires, redactions = load_rules()
     out = text
-    for pattern, repl in IP_REDACTIONS:
+    for pattern, repl in redactions:
         out = re.sub(pattern, repl, out)
-    hits = [t for t in IP_TRIPWIRES if re.search(t, out, re.IGNORECASE)]
+    hits = [t for t in tripwires if re.search(t, out, re.IGNORECASE)]
     if hits:
         raise InternalNoteLeaked(
             f"{where}: internal legal/IP note survived redaction ({', '.join(hits)}).\n"
-            "Fix it upstream, or teach IP_REDACTIONS the new shape. Refusing to mirror."
+            "Fix it upstream, or teach the injected rules the new shape. Refusing to mirror."
         )
     return out
 
