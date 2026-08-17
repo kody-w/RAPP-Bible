@@ -4,8 +4,8 @@
 
 - Canonical: https://github.com/kody-w/openrappter
 - Default branch: `main`
-- Last updated: 2026-05-16T01:47:27Z
-- License: MIT
+- Last updated: 2026-08-17T14:14:57Z
+- License: Apache-2.0
 
 ## Description
 
