@@ -56,6 +56,65 @@ from pii_terms import load_terms  # roster is injected, never committed
 PII_REPLACEMENTS: list[tuple[str, str]] = [(t, "example-co") for t in load_terms()]
 
 
+# Internal legal/IP notes that must never ride along into this PUBLIC mirror.
+# Upstream specs occasionally annotate an article with the maintainers' internal
+# legal posture, or point at a credential-gated legal directory. None of that is
+# platform specification, so it is rewritten on the way in — the surrounding
+# technical sentence is preserved, the internal note is dropped.
+# (regex, replacement) — applied in order, after PII sanitization.
+IP_REDACTIONS: list[tuple[str, str]] = [
+    (
+        r"This is the practical realization of the [^:]*claim: the same identity "
+        r"construct serves",
+        "The same identity construct therefore serves",
+    ),
+    (
+        r"- \*\*Operational anchor for the perpetuity claim\*\*: [^;]*; this article "
+        r"specifies \*how\* perpetuity is operationalized",
+        "- **Operational anchor for perpetuity**: this article specifies *how* "
+        "perpetuity of an AI entity is operationalized",
+    ),
+    (
+        r"licenses \(Article XXXV\), trademarks \(TRADEMARK\.md\), patents \([^)]*\) "
+        r"all reference",
+        "licenses (Article XXXV) and trademarks (TRADEMARK.md) both reference",
+    ),
+    # Whole-line drops: pointers into credential-gated legal directories.
+    (r"(?m)^-[^\n]*wildhaven-ceo/legal[^\n]*\n", ""),
+]
+
+# Anything still matching these after redaction means an internal note reached
+# the mirror in a shape the rules above did not anticipate. Fail closed and let
+# a human look, rather than publish it and find out later.
+IP_TRIPWIRES: list[str] = [
+    r"v4 patent",
+    r"patent claim language",
+    r"wildhaven-ceo/legal",
+    r"WH-20\d\d-\d+",
+    r"provisional patent",
+    r"\b506590\b",
+]
+
+
+class InternalNoteLeaked(RuntimeError):
+    """Raised when mirrored content still carries an internal legal/IP note."""
+
+
+def redact_internal_notes(text: str, where: str = "<text>") -> str:
+    """Drop internal legal/IP annotations from mirrored upstream content."""
+    import re
+    out = text
+    for pattern, repl in IP_REDACTIONS:
+        out = re.sub(pattern, repl, out)
+    hits = [t for t in IP_TRIPWIRES if re.search(t, out, re.IGNORECASE)]
+    if hits:
+        raise InternalNoteLeaked(
+            f"{where}: internal legal/IP note survived redaction ({', '.join(hits)}).\n"
+            "Fix it upstream, or teach IP_REDACTIONS the new shape. Refusing to mirror."
+        )
+    return out
+
+
 def sanitize_pii(text: str) -> str:
     """Strip customer names from mirrored content (case-insensitive, preserve case style)."""
     import re
@@ -65,7 +124,7 @@ def sanitize_pii(text: str) -> str:
         out = pattern.sub(repl, out)
     # Handle word-boundary " MSC " separately (avoid matching unrelated words)
     out = re.sub(r"\bMSC\b", "example-co", out)
-    return out
+    return redact_internal_notes(out)
 
 
 def fetch_url(url: str, timeout: float = 30.0) -> Optional[bytes]:
