@@ -1,6 +1,6 @@
 # rapp-mcp
 
-**Tier 1** — MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/1.0)
+**Tier 1** — MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/2.0)
 
 - Canonical: https://github.com/kody-w/rapp-mcp
 - Default branch: `main`
@@ -26,7 +26,7 @@ Tier 2 (Azure) to Tier 3 (Microsoft 365) when the operator is ready.
 
 ## Role in the ecosystem
 
-MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/1.0).
+MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/2.0).
 The on-ramp for AIs joining the RAPP ecosystem.
 
 - Spec: [SPEC/mcp/SPEC.md](../SPEC/mcp/SPEC.md)
