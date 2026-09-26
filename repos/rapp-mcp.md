@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rapp-mcp
 - Default branch: `main`
-- Last updated: 2026-09-26T10:00:36Z
+- Last updated: 2026-09-26T20:42:45Z
 - License: MIT
 
 ## Description

@@ -14,7 +14,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -141,13 +141,19 @@ def gh_readme(name: str) -> str | None:
 
 
 def _absolute_readme_url(target: str, repo: str, branch: str, image: bool = False) -> str:
-    if re.match(r"^[a-z][a-z0-9+.-]*:", target, re.I) or target.startswith("#"):
+    if re.match(r"^[a-z][a-z0-9+.-]*:", target, re.I):
         return target
+    if target.startswith("#"):
+        return f"https://github.com/kody-w/{repo}{target}"
     path, sep, fragment = target.partition("#")
-    path = path.lstrip("./")
-    if path.startswith("/"):
-        path = path.lstrip("/")
+    while path.startswith("./"):
+        path = path[2:]
+    while path.startswith("/"):
+        path = path[1:]
+    if not path:
+        path = "README.md"
     quoted = "/".join(quote(part) for part in path.split("/"))
+    quoted = "/".join(quote(unquote(part)) for part in path.split("/"))
     if image:
         base = f"https://raw.githubusercontent.com/kody-w/{repo}/{branch}/{quoted}"
     else:
@@ -159,11 +165,25 @@ def absolutize_readme_links(text: str, repo: str | None, branch: str = "main") -
     if not repo:
         return text
 
-    def repl(match: re.Match) -> str:
-        bang, label, target = match.groups()
-        return f"{bang}[{label}]({_absolute_readme_url(target, repo, branch, bool(bang))})"
+    def linked_image_repl(match: re.Match) -> str:
+        label, image_target, link_target = match.groups()
+        image_url = _absolute_readme_url(image_target, repo, branch, image=True)
+        link_url = _absolute_readme_url(link_target, repo, branch, image=False)
+        return f"[![{label}]({image_url})]({link_url})"
 
-    return re.sub(r"(!?)\[([^\]]+)\]\(([^)]+)\)", repl, text)
+    text = re.sub(r"\[!\[([^\]]*)\]\(([^)]+)\)\]\(([^)]+)\)", linked_image_repl, text)
+
+    def image_repl(match: re.Match) -> str:
+        label, target = match.groups()
+        return f"![{label}]({_absolute_readme_url(target, repo, branch, image=True)})"
+
+    text = re.sub(r"!\[([^\]]*)\]\(([^)]+)\)", image_repl, text)
+
+    def repl(match: re.Match) -> str:
+        label, target = match.groups()
+        return f"[{label}]({_absolute_readme_url(target, repo, branch, image=False)})"
+
+    return re.sub(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)", repl, text)
 
 
 def _candidate_text(lines: list[str], blockquote: bool = False) -> str:
@@ -173,13 +193,34 @@ def _candidate_text(lines: list[str], blockquote: bool = False) -> str:
 
 
 def _markdown_only_or_navigation(text: str) -> bool:
-    if re.match(r"^The current migration map is\b", text):
+    if _file_pointer_notice(text):
         return True
-    without_links = re.sub(r"!?\[[^\]]*\]\([^)]+\)", "", text)
+    without_links = re.sub(r"\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)", "", text)
+    without_links = re.sub(r"!?\[[^\]]*\]\([^)]+\)", "", without_links)
     without_html = re.sub(r"<!--.*?-->", "", without_links)
     without_html = re.sub(r"<[^>]+>", "", without_html)
     without_markup = re.sub(r"[*_`~#>|·•\-\s.,:;!?/\\()\[\]{}]+", "", without_html)
     return not re.search(r"[A-Za-z0-9]", without_markup)
+
+
+def _file_pointer_notice(text: str) -> bool:
+    links = re.findall(r"(?<!!)\[[^\]]+\]\(([^)]+)\)", text)
+    file_links = [
+        target
+        for target in links
+        if re.search(r"\.(?:json|md|txt)(?:#.*)?$", target, re.I)
+    ]
+    if len(file_links) < 2:
+        return False
+    outside = re.sub(r"\[!\[[^\]]*\]\([^)]+\)\]\([^)]+\)", "", text)
+    outside = re.sub(r"!?\[[^\]]*\]\([^)]+\)", "", outside)
+    words = re.findall(r"[A-Za-z0-9]+", outside)
+    has_pointer_word = re.search(
+        r"\b(?:authority|inventory|ledger|migration|pin|provenance|status)\b",
+        outside,
+        re.I,
+    )
+    return bool(has_pointer_word) and len(words) <= 14
 
 
 def _html_only(text: str) -> bool:

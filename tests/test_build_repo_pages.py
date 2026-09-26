@@ -89,6 +89,7 @@ def test_first_paragraph_skips_html_and_navigation_lines():
         "# rapp-mcp\n\n"
         "<div><a href=\"https://example.test\">badge</a></div>\n\n"
         "**[Docs](https://example.test)** · **[Spec](SPEC.md)**\n\n"
+        "[![CI](badge.svg)](LICENSE)\n\n"
         "Two pure-stdlib, single-file MCP servers expose local RAPP agents.\n"
     )
     assert (
@@ -102,7 +103,8 @@ def test_first_paragraph_prefers_plain_prose_over_notice_blockquote():
     readme = (
         "# RAPP\n\n"
         "> **Repository authority:** this is a notice with [relative](./PHILOSOPHY.md).\n\n"
-        "The current migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json).\n"
+        "The migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json); "
+        "the ledger is [source provenance](./HISTORICAL_SOURCE_LEDGER.json).\n"
         "\n"
         "This repository is an experimental source checkout, not a currently shipped product.\n"
     )
@@ -123,11 +125,23 @@ def test_first_paragraph_absolutizes_relative_links_and_images():
     gen = _load_generator()
     readme = (
         "# RAPP\n\n"
-        "Read [the philosophy](./PHILOSOPHY.md) and see ![diagram](assets/map one.png).\n"
+        "Read [the philosophy](./PHILOSOPHY.md), [setup](.github/skills/README.md), "
+        "[API](#api), and see ![diagram](assets/map%20one.png).\n"
     )
     assert gen.first_paragraph(readme, repo="RAPP", branch="main") == (
-        "Read [the philosophy](https://github.com/kody-w/RAPP/blob/main/PHILOSOPHY.md) "
-        "and see ![diagram](https://raw.githubusercontent.com/kody-w/RAPP/main/assets/map%20one.png)."
+        "Read [the philosophy](https://github.com/kody-w/RAPP/blob/main/PHILOSOPHY.md), "
+        "[setup](https://github.com/kody-w/RAPP/blob/main/.github/skills/README.md), "
+        "[API](https://github.com/kody-w/RAPP#api), and see "
+        "![diagram](https://raw.githubusercontent.com/kody-w/RAPP/main/assets/map%20one.png)."
+    )
+
+
+def test_first_paragraph_absolutizes_linked_badge_when_it_is_descriptive():
+    gen = _load_generator()
+    readme = "# X\n\n[![diagram](assets/diagram.svg)](docs/README.md) explains the system.\n"
+    assert gen.first_paragraph(readme, repo="X", branch="main") == (
+        "[![diagram](https://raw.githubusercontent.com/kody-w/X/main/assets/diagram.svg)]"
+        "(https://github.com/kody-w/X/blob/main/docs/README.md) explains the system."
     )
 
 
