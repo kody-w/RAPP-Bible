@@ -14,7 +14,7 @@ Portable, shareable, vibe swarm building tool. Single-file agents, local-first, 
 
 ## Summary (from upstream README)
 
-The current migration map is [`RAPP1_ADAPTATION_INVENTORY.json`](https://github.com/kody-w/RAPP/blob/main/RAPP1_ADAPTATION_INVENTORY.json); exact restored-source provenance is in [`HISTORICAL_SOURCE_LEDGER.json`](https://github.com/kody-w/RAPP/blob/main/HISTORICAL_SOURCE_LEDGER.json).
+This repository is an experimental source checkout, not a currently shipped installer or hosted product. The historical port-7071 application remains only as immutable, directly invoked test evidence; its target-owned launchers return HTTP 410 semantics without starting a process. The RAPP/1 façade is a local, pre-acceptance boundary at `127.0.0.1:7073` and defaults to `inference-refused` until a safe adapter is explicitly injected. No public one-line install, browser brainstem, Tier 2 service, downloadable egg catalog, or Shortcut is currently offered.
 
 ## Role in the ecosystem
 

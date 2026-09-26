@@ -173,6 +173,8 @@ def _candidate_text(lines: list[str], blockquote: bool = False) -> str:
 
 
 def _markdown_only_or_navigation(text: str) -> bool:
+    if re.match(r"^The current migration map is\b", text):
+        return True
     without_links = re.sub(r"!?\[[^\]]*\]\([^)]+\)", "", text)
     without_html = re.sub(r"<!--.*?-->", "", without_links)
     without_html = re.sub(r"<[^>]+>", "", without_html)

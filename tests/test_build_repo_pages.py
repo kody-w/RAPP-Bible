@@ -103,9 +103,11 @@ def test_first_paragraph_prefers_plain_prose_over_notice_blockquote():
         "# RAPP\n\n"
         "> **Repository authority:** this is a notice with [relative](./PHILOSOPHY.md).\n\n"
         "The current migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json).\n"
+        "\n"
+        "This repository is an experimental source checkout, not a currently shipped product.\n"
     )
     assert gen.first_paragraph(readme) == (
-        "The current migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json)."
+        "This repository is an experimental source checkout, not a currently shipped product."
     )
 
 
