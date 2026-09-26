@@ -63,6 +63,52 @@ INVENTORY = [
 ]
 
 
+# Bible-authored text that the generated pages carry. Each page is rebuilt from
+# INVENTORY plus live repository data; these blocks are written here, not
+# upstream, and are emitted again on every rebuild so that a regeneration never
+# drops them (tests/test_mirror_contract.py requires RAR's disposition).
+# A note is a blockquote placed right after the "**Tier N**" line.
+HAND_KEPT_NOTES = {
+    "heimdall": (
+        "> **Historical v1.2.0 note.** `heimdall` appeared only as a\n"
+        "> `fractal_scales` example, not in that snapshot's `repos` group. The snapshot\n"
+        "> is retired and is not current authority; this page remains illustrative."
+    ),
+    "twin-egg-hatcher": (
+        "> **Historical v1.2.0 note.** `twin-egg-hatcher` was not listed in that\n"
+        "> snapshot's `repos` map. The snapshot is retired and is not current\n"
+        "> authority; this page remains an out-of-catalog historical overview."
+    ),
+}
+
+# A role replaces the one-line INVENTORY role in "## Role in the ecosystem".
+HAND_KEPT_ROLES = {
+    "RAR": (
+        "RAPP Agent Registry — browse/vote/share agent.py files. It is the home of\n"
+        "**`@rapp/rapp`** (`rapp_agent.py`), [the one agent](../THE_ONE_AGENT.md) that\n"
+        "makes the entire ecosystem reachable through natural language — and of every\n"
+        "specialist agent the one agent `install`s on demand (`@rapp/twin_agent`,\n"
+        "`@rapp/egg_hatcher`, and the rest).\n"
+        "\n"
+        "Historical Bible versions called this “leg one” of the\n"
+        "[drift triangle](../DRIFT_TRIANGLE.md). The mirror contract is retired; this\n"
+        "page makes no current `action=verify` or spec-alignment claim."
+    ),
+    "rapp-mcp": (
+        "MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/2.0).\n"
+        "The on-ramp for AIs joining the RAPP ecosystem.\n"
+        "\n"
+        "- Spec: [SPEC/mcp/SPEC.md](../SPEC/mcp/SPEC.md)\n"
+        "- Site: https://kody-w.github.io/rapp-mcp/"
+    ),
+}
+
+# repos/_index.md is the historical v1.2.0 family index, kept by hand since
+# 7c89f12 (2026-08-23). build_index() leaves an index that carries this marker
+# alone instead of replacing it with the tier table below.
+INDEX_KEEP_MARKER = "<!-- hand-kept: scripts/build_repo_pages.py does not rewrite this file -->"
+
+
 def gh_repo(name: str) -> dict | None:
     try:
         out = subprocess.run(
@@ -131,6 +177,9 @@ def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
     body.append("")
     body.append(f"**Tier {tier}** — {role}")
     body.append("")
+    if name in HAND_KEPT_NOTES:
+        body.extend(HAND_KEPT_NOTES[name].split("\n"))
+        body.append("")
     body.append(f"- Canonical: https://github.com/kody-w/{name}")
     homepage = meta.get("homepage")
     if homepage:
@@ -150,7 +199,7 @@ def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
         body.append("")
     body.append("## Role in the ecosystem")
     body.append("")
-    body.append(role)
+    body.extend(HAND_KEPT_ROLES.get(name, role).split("\n"))
     body.append("")
     body.append("---")
     body.append("")
@@ -164,6 +213,10 @@ def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
 
 
 def build_index(results: list[tuple[str, int, str, bool, str]]) -> None:
+    dest = REPO_ROOT / "repos" / "_index.md"
+    if dest.exists() and INDEX_KEEP_MARKER in dest.read_text(encoding="utf-8"):
+        print("  KEEP: repos/_index.md (hand-kept)")
+        return
     by_tier: dict[int, list[tuple[str, str]]] = {1: [], 2: [], 3: []}
     skipped: list[tuple[str, str]] = []
     for name, tier, role, ok, msg in results:
