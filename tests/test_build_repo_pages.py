@@ -60,6 +60,26 @@ def test_hand_kept_text_matches_the_committed_pages():
             assert text in page, f"repos/{name}.md no longer carries its hand-kept text"
 
 
+def test_first_paragraph_skips_rapp1_network_header():
+    gen = _load_generator()
+    readme = (
+        "# RAR — RAPP Agent Registry\n\n"
+        f"{gen.NETWORK_HEADER_START}\n"
+        "[![RAPP/1](badge.svg)](portfolio.md) · **New to RAPP?** "
+        "[Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)\n"
+        f"{gen.NETWORK_HEADER_END}\n\n"
+        "> **Spec:** `rapp-registry/1.0` — canonical registry.\n\n"
+        "**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents.\n"
+    )
+    assert gen.first_paragraph(readme) == "> **Spec:** `rapp-registry/1.0` — canonical registry."
+
+
+def test_first_paragraph_without_network_header_is_unchanged():
+    gen = _load_generator()
+    readme = "# Heimdall\n\n> A RAPP front door on the public internet.\n\nSecond paragraph.\n"
+    assert gen.first_paragraph(readme) == "> A RAPP front door on the public internet."
+
+
 def test_rebuild_keeps_hand_kept_notes_and_roles(tmp_path, monkeypatch):
     gen = _load_generator()
     (tmp_path / "repos").mkdir()
@@ -74,6 +94,45 @@ def test_rebuild_keeps_hand_kept_notes_and_roles(tmp_path, monkeypatch):
         assert gen.HAND_KEPT_ROLES.get(name, "") in page
     rebuilt_rar = (tmp_path / "repos" / "RAR.md").read_text(encoding="utf-8").lower()
     assert "mirror contract is retired" in rebuilt_rar
+
+
+def test_rebuild_uses_real_readme_summary_after_network_header(tmp_path, monkeypatch):
+    gen = _load_generator()
+    (tmp_path / "repos").mkdir()
+    _offline(gen, monkeypatch, tmp_path)
+
+    readmes = {
+        "RAR": (
+            "# RAR — RAPP Agent Registry\n\n"
+            f"{gen.NETWORK_HEADER_START}\n"
+            "[![RAPP/1](badge.svg)](portfolio.md) · **New to RAPP?** "
+            "[Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)\n"
+            f"{gen.NETWORK_HEADER_END}\n\n"
+            "> **Spec:** `rapp-registry/1.0` — the canonical agent registry.\n\n"
+            "**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents.\n"
+        ),
+        "heimdall": (
+            "# Heimdall\n\n"
+            f"{gen.NETWORK_HEADER_START}\n"
+            "[![RAPP/1](badge.svg)](portfolio.md) · **New to RAPP?** "
+            "[Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)\n"
+            f"{gen.NETWORK_HEADER_END}\n\n"
+            "> A RAPP front door on the public internet. Real estate, not software.\n"
+        ),
+    }
+    monkeypatch.setattr(gen, "gh_readme", lambda name: readmes[name])
+    entries = {name: (tier, role) for name, tier, role in gen.INVENTORY}
+    for name in ("RAR", "heimdall"):
+        tier, role = entries[name]
+        ok, message = gen.build_one(name, tier, role)
+        assert ok, message
+
+    rar = (tmp_path / "repos" / "RAR.md").read_text(encoding="utf-8")
+    heimdall = (tmp_path / "repos" / "heimdall.md").read_text(encoding="utf-8")
+    assert "> **Spec:** `rapp-registry/1.0` — the canonical agent registry." in rar
+    assert "> A RAPP front door on the public internet. Real estate, not software." in heimdall
+    assert "New to RAPP?" not in rar
+    assert "New to RAPP?" not in heimdall
 
 
 def test_build_index_leaves_the_hand_kept_index_alone(tmp_path, monkeypatch):

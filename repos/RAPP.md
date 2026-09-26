@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP
 - Site: https://kody-w.github.io/RAPP/
 - Default branch: `main`
-- Last updated: 2026-05-20T01:05:13Z
+- Last updated: 2026-09-26T14:16:45Z
 - License: NOASSERTION
 
 ## Description
@@ -14,7 +14,7 @@ Portable, shareable, vibe swarm building tool. Single-file agents, local-first, 
 
 ## Summary (from upstream README)
 
-A local-first AI agent server. Single-file Python agents, no API keys — uses your existing GitHub Copilot OAuth as the LLM backend. Drops in your home directory or any project repo via one curl pipe.
+> **Repository authority:** this is the canonical home of the public RAPP > foundation, reference implementation, organism model, and > [philosophy](./PHILOSOPHY.md). > [`kody-w/rapp-1`](https://github.com/kody-w/rapp-1) is the canonical wire > protocol authority; it does not replace this repository.
 
 ## Role in the ecosystem
 

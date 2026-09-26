@@ -107,6 +107,8 @@ HAND_KEPT_ROLES = {
 # 7c89f12 (2026-08-23). build_index() leaves an index that carries this marker
 # alone instead of replacing it with the tier table below.
 INDEX_KEEP_MARKER = "<!-- hand-kept: scripts/build_repo_pages.py does not rewrite this file -->"
+NETWORK_HEADER_START = "<!-- rapp1:network-header:start -->"
+NETWORK_HEADER_END = "<!-- rapp1:network-header:end -->"
 
 
 def gh_repo(name: str) -> dict | None:
@@ -144,8 +146,16 @@ def first_paragraph(md: str, max_chars: int = 600) -> str:
     lines = md.splitlines()
     buf: list[str] = []
     seen_text = False
+    in_network_header = False
     for ln in lines:
         s = ln.strip()
+        if s == NETWORK_HEADER_START:
+            in_network_header = True
+            continue
+        if in_network_header:
+            if s == NETWORK_HEADER_END:
+                in_network_header = False
+            continue
         if not s:
             if seen_text:
                 break

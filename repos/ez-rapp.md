@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/ez-rapp
 - Default branch: `main`
-- Last updated: 2026-05-20T01:22:52Z
+- Last updated: 2026-08-28T03:03:04Z
 - License: MIT
 
 ## Description

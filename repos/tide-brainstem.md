@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/tide-brainstem
 - Default branch: `main`
-- Last updated: 2026-05-09T23:19:17Z
+- Last updated: 2026-08-28T19:01:40Z
 - License: unspecified
 
 ## Description
