@@ -152,7 +152,6 @@ def _absolute_readme_url(target: str, repo: str, branch: str, image: bool = Fals
         path = path[1:]
     if not path:
         path = "README.md"
-    quoted = "/".join(quote(part) for part in path.split("/"))
     quoted = "/".join(quote(unquote(part)) for part in path.split("/"))
     if image:
         base = f"https://raw.githubusercontent.com/kody-w/{repo}/{branch}/{quoted}"
