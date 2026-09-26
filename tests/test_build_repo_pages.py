@@ -71,13 +71,62 @@ def test_first_paragraph_skips_rapp1_network_header():
         "> **Spec:** `rapp-registry/1.0` — canonical registry.\n\n"
         "**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents.\n"
     )
-    assert gen.first_paragraph(readme) == "> **Spec:** `rapp-registry/1.0` — canonical registry."
+    assert (
+        gen.first_paragraph(readme)
+        == "**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents."
+    )
 
 
 def test_first_paragraph_without_network_header_is_unchanged():
     gen = _load_generator()
-    readme = "# Heimdall\n\n> A RAPP front door on the public internet.\n\nSecond paragraph.\n"
-    assert gen.first_paragraph(readme) == "> A RAPP front door on the public internet."
+    readme = "# OpenRappter\n\nSerious local AI for real business work.\n\nSecond paragraph.\n"
+    assert gen.first_paragraph(readme) == "Serious local AI for real business work."
+
+
+def test_first_paragraph_skips_html_and_navigation_lines():
+    gen = _load_generator()
+    readme = (
+        "# rapp-mcp\n\n"
+        "<div><a href=\"https://example.test\">badge</a></div>\n\n"
+        "**[Docs](https://example.test)** · **[Spec](SPEC.md)**\n\n"
+        "Two pure-stdlib, single-file MCP servers expose local RAPP agents.\n"
+    )
+    assert (
+        gen.first_paragraph(readme)
+        == "Two pure-stdlib, single-file MCP servers expose local RAPP agents."
+    )
+
+
+def test_first_paragraph_prefers_plain_prose_over_notice_blockquote():
+    gen = _load_generator()
+    readme = (
+        "# RAPP\n\n"
+        "> **Repository authority:** this is a notice with [relative](./PHILOSOPHY.md).\n\n"
+        "The current migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json).\n"
+    )
+    assert gen.first_paragraph(readme) == (
+        "The current migration map is [the adaptation inventory](./RAPP1_ADAPTATION_INVENTORY.json)."
+    )
+
+
+def test_first_paragraph_unwraps_blockquote_when_no_plain_prose_exists():
+    gen = _load_generator()
+    readme = "# Heimdall\n\n> A RAPP front door on the public internet.\n> Real estate, not software.\n\n## Visit\n"
+    assert gen.first_paragraph(readme) == (
+        "A RAPP front door on the public internet. Real estate, not software."
+    )
+
+
+def test_first_paragraph_absolutizes_relative_links_and_images():
+    gen = _load_generator()
+    readme = (
+        "# RAPP\n\n"
+        "Read [the philosophy](./PHILOSOPHY.md) and see ![diagram](assets/map one.png).\n"
+    )
+    assert gen.first_paragraph(readme, repo="RAPP", branch="main") == (
+        "Read [the philosophy](https://github.com/kody-w/RAPP/blob/main/PHILOSOPHY.md) "
+        "and see ![diagram](https://raw.githubusercontent.com/kody-w/RAPP/main/assets/map%20one.png)."
+    )
 
 
 def test_rebuild_keeps_hand_kept_notes_and_roles(tmp_path, monkeypatch):
@@ -129,8 +178,8 @@ def test_rebuild_uses_real_readme_summary_after_network_header(tmp_path, monkeyp
 
     rar = (tmp_path / "repos" / "RAR.md").read_text(encoding="utf-8")
     heimdall = (tmp_path / "repos" / "heimdall.md").read_text(encoding="utf-8")
-    assert "> **Spec:** `rapp-registry/1.0` — the canonical agent registry." in rar
-    assert "> A RAPP front door on the public internet. Real estate, not software." in heimdall
+    assert "**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents." in rar
+    assert "A RAPP front door on the public internet. Real estate, not software." in heimdall
     assert "New to RAPP?" not in rar
     assert "New to RAPP?" not in heimdall
 

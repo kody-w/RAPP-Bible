@@ -17,7 +17,7 @@ Heimdall — RAPP front door
 
 ## Summary (from upstream README)
 
-> A RAPP front door on the public internet. Real estate, not software.
+A RAPP front door on the public internet. Real estate, not software.
 
 ## Role in the ecosystem
 

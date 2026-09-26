@@ -14,7 +14,7 @@ Portable, shareable, vibe swarm building tool. Single-file agents, local-first, 
 
 ## Summary (from upstream README)
 
-> **Repository authority:** this is the canonical home of the public RAPP > foundation, reference implementation, organism model, and > [philosophy](./PHILOSOPHY.md). > [`kody-w/rapp-1`](https://github.com/kody-w/rapp-1) is the canonical wire > protocol authority; it does not replace this repository.
+The current migration map is [`RAPP1_ADAPTATION_INVENTORY.json`](https://github.com/kody-w/RAPP/blob/main/RAPP1_ADAPTATION_INVENTORY.json); exact restored-source provenance is in [`HISTORICAL_SOURCE_LEDGER.json`](https://github.com/kody-w/RAPP/blob/main/HISTORICAL_SOURCE_LEDGER.json).
 
 ## Role in the ecosystem
 

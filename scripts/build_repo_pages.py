@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import quote
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -139,36 +140,128 @@ def gh_readme(name: str) -> str | None:
     return None
 
 
-def first_paragraph(md: str, max_chars: int = 600) -> str:
-    """Extract the first non-heading paragraph from markdown."""
+def _absolute_readme_url(target: str, repo: str, branch: str, image: bool = False) -> str:
+    if re.match(r"^[a-z][a-z0-9+.-]*:", target, re.I) or target.startswith("#"):
+        return target
+    path, sep, fragment = target.partition("#")
+    path = path.lstrip("./")
+    if path.startswith("/"):
+        path = path.lstrip("/")
+    quoted = "/".join(quote(part) for part in path.split("/"))
+    if image:
+        base = f"https://raw.githubusercontent.com/kody-w/{repo}/{branch}/{quoted}"
+    else:
+        base = f"https://github.com/kody-w/{repo}/blob/{branch}/{quoted}"
+    return base + (sep + fragment if sep else "")
+
+
+def absolutize_readme_links(text: str, repo: str | None, branch: str = "main") -> str:
+    if not repo:
+        return text
+
+    def repl(match: re.Match) -> str:
+        bang, label, target = match.groups()
+        return f"{bang}[{label}]({_absolute_readme_url(target, repo, branch, bool(bang))})"
+
+    return re.sub(r"(!?)\[([^\]]+)\]\(([^)]+)\)", repl, text)
+
+
+def _candidate_text(lines: list[str], blockquote: bool = False) -> str:
+    if blockquote:
+        lines = [re.sub(r"^>\s?", "", ln.strip()) for ln in lines]
+    return " ".join(ln.strip() for ln in lines if ln.strip())
+
+
+def _markdown_only_or_navigation(text: str) -> bool:
+    without_links = re.sub(r"!?\[[^\]]*\]\([^)]+\)", "", text)
+    without_html = re.sub(r"<!--.*?-->", "", without_links)
+    without_html = re.sub(r"<[^>]+>", "", without_html)
+    without_markup = re.sub(r"[*_`~#>|·•\-\s.,:;!?/\\()\[\]{}]+", "", without_html)
+    return not re.search(r"[A-Za-z0-9]", without_markup)
+
+
+def _html_only(text: str) -> bool:
+    if all(ln.strip().startswith("<") and ln.strip().endswith(">") for ln in text.splitlines() if ln.strip()):
+        return True
+    stripped = re.sub(r"<!--.*?-->", "", text, flags=re.S).strip()
+    stripped = re.sub(r"<[^>]+>", "", stripped).strip()
+    return not stripped
+
+
+def _descriptive_candidate(lines: list[str]) -> tuple[str, str] | None:
+    if not lines:
+        return None
+    blockquote = all(ln.strip().startswith(">") for ln in lines)
+    text = _candidate_text(lines, blockquote=blockquote)
+    if not text:
+        return None
+    if _html_only(text) or _markdown_only_or_navigation(text):
+        return None
+    if all(re.match(r"^\s*(?:[-*+]\s+|\|)", ln) for ln in lines):
+        return None
+    return ("quote" if blockquote else "plain", text)
+
+
+def first_paragraph(
+    md: str,
+    max_chars: int = 600,
+    repo: str | None = None,
+    branch: str = "main",
+) -> str:
+    """Extract the first descriptive README paragraph."""
     if not md:
         return ""
     lines = md.splitlines()
-    buf: list[str] = []
-    seen_text = False
+    paragraph: list[str] = []
+    quote_fallback: str | None = None
     in_network_header = False
+    in_code = False
+
+    def flush():
+        nonlocal paragraph, quote_fallback
+        candidate = _descriptive_candidate(paragraph)
+        paragraph = []
+        if candidate is None:
+            return None
+        kind, text = candidate
+        if kind == "plain":
+            return text
+        if quote_fallback is None:
+            quote_fallback = text
+        return None
+
     for ln in lines:
         s = ln.strip()
+        if s.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
         if s == NETWORK_HEADER_START:
             in_network_header = True
+            paragraph = []
             continue
         if in_network_header:
             if s == NETWORK_HEADER_END:
                 in_network_header = False
             continue
         if not s:
-            if seen_text:
+            winner = flush()
+            if winner:
+                return absolutize_readme_links(winner, repo, branch)[:max_chars]
+            continue
+        if s.startswith("#"):
+            if paragraph or quote_fallback:
                 break
             continue
-        if s.startswith("#") or s.startswith("<!--") or s.startswith("!["):
+        if s.startswith("<!--") and s.endswith("-->"):
             continue
-        if s.startswith("```"):
+        if s.startswith("!["):
             continue
-        buf.append(s)
-        seen_text = True
-        if sum(len(x) for x in buf) > max_chars:
-            break
-    return " ".join(buf)[:max_chars]
+        paragraph.append(s)
+
+    winner = flush() or quote_fallback or ""
+    return absolutize_readme_links(winner, repo, branch)[:max_chars]
 
 
 def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
@@ -179,7 +272,8 @@ def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
         return False, f"skipped (private): {name}"
 
     readme = gh_readme(name)
-    summary = sanitize(first_paragraph(readme)) if readme else ""
+    branch = meta.get("default_branch", "main")
+    summary = sanitize(first_paragraph(readme, repo=name, branch=branch)) if readme else ""
     desc = sanitize(meta.get("description") or "")
 
     body = []
@@ -194,7 +288,7 @@ def build_one(name: str, tier: int, role: str) -> tuple[bool, str]:
     homepage = meta.get("homepage")
     if homepage:
         body.append(f"- Site: {homepage}")
-    body.append(f"- Default branch: `{meta.get('default_branch', 'main')}`")
+    body.append(f"- Default branch: `{branch}`")
     body.append(f"- Last updated: {meta.get('updated_at', 'unknown')}")
     body.append(f"- License: {(meta.get('license') or {}).get('spdx_id') or 'unspecified'}")
     body.append("")

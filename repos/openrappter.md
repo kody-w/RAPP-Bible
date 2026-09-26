@@ -4,8 +4,8 @@
 
 - Canonical: https://github.com/kody-w/openrappter
 - Default branch: `main`
-- Last updated: 2026-09-13T05:35:50Z
-- License: Apache-2.0
+- Last updated: 2026-05-16T01:47:27Z
+- License: MIT
 
 ## Description
 
@@ -13,7 +13,7 @@
 
 ## Summary (from upstream README)
 
-Serious local AI for real business work.
+<div align="center">
 
 ## Role in the ecosystem
 

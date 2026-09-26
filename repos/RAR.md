@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/RAR
 - Default branch: `main`
-- Last updated: 2026-09-26T19:54:20Z
+- Last updated: 2026-09-26T20:29:43Z
 - License: MIT
 
 ## Description
@@ -13,7 +13,7 @@ The open single-file AI agent registry. Browse, vote, share agent.py files. Poke
 
 ## Summary (from upstream README)
 
-> **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
+**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
 ## Role in the ecosystem
 

@@ -13,7 +13,7 @@ Bring RAPP onto any MCP host: serve drop-in agent.py files as tools, or bridge a
 
 ## Summary (from upstream README)
 
-**[📖 Docs & live site →](https://kody-w.github.io/rapp-mcp)**  ·  **[Spec → `SPEC.md`](SPEC.md)**
+Bring **RAPP** onto any MCP host (Claude Desktop, GitHub Copilot CLI, Cursor, …). Three small, dependency-free **MCP (Model Context Protocol)** servers — two serve the local machine, the third serves a static catalog straight off `raw.githubusercontent.com`:
 
 ## Role in the ecosystem
 
