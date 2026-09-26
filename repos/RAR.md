@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/RAR
 - Default branch: `main`
-- Last updated: 2026-05-21T22:59:35Z
+- Last updated: 2026-09-26T20:29:43Z
 - License: MIT
 
 ## Description
@@ -13,7 +13,7 @@ The open single-file AI agent registry. Browse, vote, share agent.py files. Poke
 
 ## Summary (from upstream README)
 
-**The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 
 ## Role in the ecosystem
 

@@ -8,7 +8,7 @@
 
 - Canonical: https://github.com/kody-w/heimdall
 - Default branch: `main`
-- Last updated: 2026-05-18T20:09:24Z
+- Last updated: 2026-09-26T19:28:38Z
 - License: unspecified
 
 ## Description
@@ -17,7 +17,7 @@ Heimdall — RAPP front door
 
 ## Summary (from upstream README)
 
-> A RAPP front door on the public internet. Real estate, not software.
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/heimdall.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/heimdall.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 
 ## Role in the ecosystem
 

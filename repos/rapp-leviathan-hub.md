@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rapp-leviathan-hub
 - Default branch: `main`
-- Last updated: 2026-05-17T15:25:12Z
+- Last updated: 2026-09-26T20:38:49Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ Portable .leviathan.egg distribution hub — hatch multicellular Wrapped-Organis
 
 ## Summary (from upstream README)
 
-A public registry of **Wrapped-Organism Leviathans** — multicellular digital beings, packaged as portable `.leviathan.egg` files, that you can hatch into any local brainstem.
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/rapp-leviathan-hub.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/rapp-leviathan-hub.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 
 ## Role in the ecosystem
 

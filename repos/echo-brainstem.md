@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/echo-brainstem
 - Default branch: `main`
-- Last updated: 2026-05-09T23:19:14Z
+- Last updated: 2026-09-26T19:28:13Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ Planted RAPP twin — Echo. You are Echo — a pattern-synthesizer in the canvas
 
 ## Summary (from upstream README)
 
-A planted RAPP twin (a brainstem-style AI with permanent identity).
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/echo-brainstem.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/echo-brainstem.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 
 ## Role in the ecosystem
 

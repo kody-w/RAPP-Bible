@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP
 - Site: https://kody-w.github.io/RAPP/
 - Default branch: `main`
-- Last updated: 2026-05-20T01:05:13Z
+- Last updated: 2026-09-26T21:22:14Z
 - License: NOASSERTION
 
 ## Description
@@ -14,7 +14,7 @@ Portable, shareable, vibe swarm building tool. Single-file agents, local-first, 
 
 ## Summary (from upstream README)
 
-A local-first AI agent server. Single-file Python agents, no API keys — uses your existing GitHub Copilot OAuth as the LLM backend. Drops in your home directory or any project repo via one curl pipe.
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAPP.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAPP.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
 
 ## Role in the ecosystem
 
