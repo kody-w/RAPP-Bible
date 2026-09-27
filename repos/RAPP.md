@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP
 - Site: https://kody-w.github.io/RAPP/
 - Default branch: `main`
-- Last updated: 2026-09-26T14:16:45Z
+- Last updated: 2026-09-26T23:15:46Z
 - License: NOASSERTION
 
 ## Description
@@ -14,7 +14,7 @@ Portable, shareable, vibe swarm building tool. Single-file agents, local-first, 
 
 ## Summary (from upstream README)
 
-This repository is an experimental source checkout, not a currently shipped installer or hosted product. The historical port-7071 application remains only as immutable, directly invoked test evidence; its target-owned launchers return HTTP 410 semantics without starting a process. The RAPP/1 façade is a local, pre-acceptance boundary at `127.0.0.1:7073` and defaults to `inference-refused` until a safe adapter is explicitly injected. No public one-line install, browser brainstem, Tier 2 service, downloadable egg catalog, or Shortcut is currently offered.
+This repository is an experimental source checkout, not a currently shipped installer or hosted product. The historical port-7071 application remains only as immutable, directly invoked test evidence; its target-owned launchers return HTTP 410 semantics without starting a process. The RAPP/1 façade is a local, pre-acceptance boundary at `127.0.0.1:7073` and defaults to `inference-refused` until a safe adapter is explicitly injected. This repository ships no installer itself: no public one-line install, browser brainstem, Tier 2 service, downloadable egg catalog, or Shortcut is offered from it.
 
 ## Role in the ecosystem
 

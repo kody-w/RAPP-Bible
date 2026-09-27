@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rappterbox
 - Default branch: `main`
-- Last updated: 2026-05-11T03:01:47Z
+- Last updated: 2026-09-26T22:43:46Z
 - License: NOASSERTION
 
 ## Description
@@ -13,7 +13,7 @@ Local-first brainstem console for digital organisms — cartridge slot for *_age
 
 ## Summary (from upstream README)
 
-> **A static, local-first runtime for digital organisms — with a cartridge slot.**
+The rappterbox console is a small Python/Flask brainstem that boots on your machine, exposes a chat surface at `http://127.0.0.1:7071`, and loads `*_agent.py` cartridges from `agents/`. Think Wii: the hardware is sealed and never changes; the games are cartridges you swap in.
 
 ## Role in the ecosystem
 
