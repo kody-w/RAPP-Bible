@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rapp-installer
 - Default branch: `main`
-- Last updated: 2026-05-04T21:44:42Z
+- Last updated: 2026-09-26T21:11:17Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ rapp-installer
 
 ## Summary (from upstream README)
 
-> **👉 [Get Started at kody-w.github.io/rapp-installer](https://kody-w.github.io/rapp-installer/)**
+A local-first AI agent server powered by GitHub Copilot. No API keys. No cloud setup. Just your GitHub account.
 
 ## Role in the ecosystem
 
