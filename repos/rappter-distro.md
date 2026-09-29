@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rappter-distro
 - Default branch: `main`
-- Last updated: 2026-05-17T02:43:45Z
+- Last updated: 2026-09-27T15:23:45Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ The full-bodied Rappter organism distro for the RAPP grail kernel — layers org
 
 ## Summary (from upstream README)
 
-> The **Rappter distro** — organism layer on top of the RAPP grail kernel.
+The RAPP kernel ([`kody-w/rapp-installer`](https://github.com/kody-w/rapp-installer), mirrored at [`kody-w/RAPP`](https://github.com/kody-w/RAPP)) ships the full three-tier Stack: Brainstem (Tier 1), Swarm/Azure Functions (Tier 2), Copilot Studio (Tier 3). That stack is the kernel's identity — nothing in this distro displaces it.
 
 ## Role in the ecosystem
 
