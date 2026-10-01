@@ -5,16 +5,16 @@
 - Canonical: https://github.com/kody-w/kody-w-twin
 - Site: https://kody-w.github.io/kody-w-twin/
 - Default branch: `main`
-- Last updated: 2026-05-18T20:09:14Z
+- Last updated: 2026-07-16T18:49:47Z
 - License: unspecified
 
 ## Description
 
-Kody Wildfeuer's digital twin front door — rappid:v2:operator:@kody-w/twin:5b8ba4796692197aa4ccde5dfa5beb51@github.com/kody-w/kody-w-twin
+Kody Wildfeuer's digital twin front door — rappid:@kody-w/kody-w-twin:a4bbb62313f19c227012ab4238bafcc2980e47df1798a986416f3bfda92032a8
 
 ## Summary (from upstream README)
 
-> The operator twin for @kody-w.  Both a public front door (per > CONSTITUTION Article XLVI + LI) **and** a hatchable twin identity.
+The operator twin for @kody-w.  Both a public front door (per CONSTITUTION Article XLVI + LI) **and** a hatchable twin identity.
 
 ## Role in the ecosystem
 

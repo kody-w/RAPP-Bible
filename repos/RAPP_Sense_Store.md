@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP_Sense_Store
 - Site: https://kody-w.github.io/RAPP_Sense_Store/
 - Default branch: `main`
-- Last updated: 2026-05-09T15:17:14Z
+- Last updated: 2026-09-26T20:39:45Z
 - License: unspecified
 
 ## Description
@@ -14,7 +14,7 @@ Public catalog of RAPP senses — modular, per-channel output overlays (eli5, he
 
 ## Summary (from upstream README)
 
-**[📋 SPEC](./SPEC.md)** · **[📚 Constitution Article XXIV](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxiv--senses-are-agent-first-frontends-are-modular-consumers)** · **[⚙️ Engine](https://github.com/kody-w/RAPP)**
+Public catalog of RAPP **senses** — modular per-channel output overlays that drop into a brainstem's `rapp_brainstem/utils/senses/` directory.
 
 ## Role in the ecosystem
 
