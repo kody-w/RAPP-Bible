@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/kody-twin
 - Default branch: `main`
-- Last updated: 2026-05-09T23:19:22Z
+- Last updated: 2026-10-02T12:39:14Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ Kody Wildfeuer — RAPP front door
 
 ## Summary (from upstream README)
 
-> A RAPP front door on the public internet. Real estate, not software.
+A RAPP front door on the public internet. Real estate, not software.
 
 ## Role in the ecosystem
 

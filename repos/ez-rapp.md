@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/ez-rapp
 - Default branch: `main`
-- Last updated: 2026-05-20T01:22:52Z
+- Last updated: 2026-09-26T20:40:38Z
 - License: MIT
 
 ## Description
@@ -13,7 +13,7 @@ Electron desktop wrapper for the RAPP brainstem — no terminal, no browser, jus
 
 ## Summary (from upstream README)
 
-> **Plain-English AI on your laptop. No terminal. No API keys. Just download and chat.**
+ez-rapp is the friendliest way to run a local AI on your computer. You don't need to know Python, you don't need to copy-paste commands, you don't need an OpenAI key. If you already have **GitHub Copilot** ([sign up — $10/mo or free for students/OSS](https://github.com/github-copilot/signup)), you're done.
 
 ## Role in the ecosystem
 
