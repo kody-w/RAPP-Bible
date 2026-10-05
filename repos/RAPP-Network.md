@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP-Network
 - Site: https://github.com/kody-w/RAPP
 - Default branch: `main`
-- Last updated: 2026-05-21T16:22:02Z
+- Last updated: 2026-09-26T21:30:56Z
 - License: NOASSERTION
 
 ## Description
@@ -14,7 +14,7 @@ The network layer on top of kody-w/RAPP. Project-anchored twin neighborhoods thr
 
 ## Summary (from upstream README)
 
-> **The network layer on top of [`kody-w/RAPP`](https://github.com/kody-w/RAPP).** Project-anchored twins, ad-hoc on-device neighborhoods, fully managed through natural-language chat with your global brainstem. **One drop-in file** materializes the whole thing. **Offline-first** by default.
+**The network layer on top of [`kody-w/RAPP`](https://github.com/kody-w/RAPP).** Project-anchored twins, ad-hoc on-device neighborhoods, fully managed through natural-language chat with your global brainstem. **One drop-in file** materializes the whole thing. **Offline-first** by default.
 
 ## Role in the ecosystem
 

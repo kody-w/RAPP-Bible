@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP_Store
 - Site: https://kody-w.github.io/RAPP_Store/
 - Default branch: `main`
-- Last updated: 2026-05-09T18:37:01Z
+- Last updated: 2026-09-26T21:11:24Z
 - License: unspecified
 
 ## Description
@@ -14,7 +14,7 @@ Public catalog of RAPP rapplications — single-file Python agents that drop int
 
 ## Summary (from upstream README)
 
-**[📦 Browse the store](https://kody-w.github.io/RAPP_Store/)** · **[🦎 Pokédex API](#pokédex-api)** · **[📋 SPEC](./SPEC.md)** · **[🔒 Gated rapps (§11)](./SPEC.md#11-gated-rapplications-access-private)** · **[🔌 RAPP Agent Registry](https://github.com/kody-w/RAR)** · **[⚙️ RAPP engine](https://github.com/kody-w/RAPP)**
+Public catalog of RAPP **rapplications** — chat-operated applications, from simple agent/UI integrations to explicitly packaged local application stacks. Native macOS release downloads remain an independent optional distribution. Existing integrations load into a brainstem; native applications install separately. Browse the [store](https://kody-w.github.io/RAPP_Store/) or [Pokédex API](https://github.com/kody-w/RAPP_Store#pokédex-api).
 
 ## Role in the ecosystem
 
