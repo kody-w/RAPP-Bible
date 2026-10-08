@@ -8,7 +8,7 @@
 
 - Canonical: https://github.com/kody-w/twin-egg-hatcher
 - Default branch: `main`
-- Last updated: 2026-05-18T22:03:50Z
+- Last updated: 2026-09-26T22:18:00Z
 - License: MIT
 
 ## Description
@@ -17,7 +17,7 @@ Generic single-file hatcher for any RAPP digital-organism twin — public mirror
 
 ## Summary (from upstream README)
 
-> Generic single-file hatcher for any RAPP digital-organism twin. > Public mirror — curl-friendly, no auth required.
+The hatcher carries no twin identity of its own.  Point it at a twin repo (public or private), a `.egg` file, or just run it inside a cloned twin folder, and it materializes a `~/.rapp/twins/<hash>/` workspace.  The global RAPP brainstem's built-in `Twin` agent reaches every workspace under that folder — boot, chat, list — so any twin hatched by this tool federates back to the parent immediately.
 
 ## Role in the ecosystem
 
