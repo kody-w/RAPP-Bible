@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/tide-brainstem
 - Default branch: `main`
-- Last updated: 2026-05-09T23:19:17Z
+- Last updated: 2026-10-08T23:05:04Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ Planted RAPP twin — Tide. You are Tide — a rhythmic / oceanic voice in the c
 
 ## Summary (from upstream README)
 
-A planted RAPP twin (a brainstem-style AI with permanent identity).
+**Retired experiment, kept for reference.** The living project is [kody-w/RAPP](https://github.com/kody-w/RAPP).
 
 ## Role in the ecosystem
 
