@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rappter-distro
 - Default branch: `main`
-- Last updated: 2026-05-17T02:43:45Z
+- Last updated: 2026-10-08T23:03:42Z
 - License: unspecified
 
 ## Description
@@ -13,7 +13,7 @@ The full-bodied Rappter organism distro for the RAPP grail kernel — layers org
 
 ## Summary (from upstream README)
 
-> The **Rappter distro** — organism layer on top of the RAPP grail kernel.
+**Retired experiment, kept for reference.** The living project is [kody-w/RAPP](https://github.com/kody-w/RAPP).
 
 ## Role in the ecosystem
 
