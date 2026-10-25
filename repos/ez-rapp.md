@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/ez-rapp
 - Default branch: `main`
-- Last updated: 2026-05-20T01:22:52Z
+- Last updated: 2026-10-08T22:58:55Z
 - License: MIT
 
 ## Description
@@ -13,7 +13,7 @@ Electron desktop wrapper for the RAPP brainstem — no terminal, no browser, jus
 
 ## Summary (from upstream README)
 
-> **Plain-English AI on your laptop. No terminal. No API keys. Just download and chat.**
+**Retired experiment, kept for reference.** The living project is [kody-w/rapp-installer](https://github.com/kody-w/rapp-installer).
 
 ## Role in the ecosystem
 
