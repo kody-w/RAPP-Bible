@@ -4,16 +4,16 @@
 
 - Canonical: https://github.com/kody-w/openrappter
 - Default branch: `main`
-- Last updated: 2026-09-13T05:35:50Z
-- License: Apache-2.0
+- Last updated: 2026-10-24T19:20:22Z
+- License: MIT
 
 ## Description
 
-🦖 Local-first AI agent powered by GitHub Copilot SDK — no API keys required
+🦖 OpenRappter: a creature in your Mac's notch. Hold a key and talk. Local-first, runs on your own Brainstem.
 
 ## Summary (from upstream README)
 
-Serious local AI for real business work.
+It thinks through the GitHub Copilot sign-in you already have. No new API keys, no new accounts, no new monthly bill. Your voice is turned into words on your Mac; only the words go to GitHub Copilot, through your own sign-in.
 
 ## Role in the ecosystem
 
