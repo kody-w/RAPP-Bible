@@ -5,7 +5,7 @@
 - Canonical: https://github.com/kody-w/RAPP_Store
 - Site: https://kody-w.github.io/RAPP_Store/
 - Default branch: `main`
-- Last updated: 2026-05-09T18:37:01Z
+- Last updated: 2026-11-04T14:17:12Z
 - License: unspecified
 
 ## Description
@@ -14,7 +14,7 @@ Public catalog of RAPP rapplications — single-file Python agents that drop int
 
 ## Summary (from upstream README)
 
-**[📦 Browse the store](https://kody-w.github.io/RAPP_Store/)** · **[🦎 Pokédex API](#pokédex-api)** · **[📋 SPEC](./SPEC.md)** · **[🔒 Gated rapps (§11)](./SPEC.md#11-gated-rapplications-access-private)** · **[🔌 RAPP Agent Registry](https://github.com/kody-w/RAR)** · **[⚙️ RAPP engine](https://github.com/kody-w/RAPP)**
+> **Status: alias of RAR (2026-11-04).** 21 of these 23 rapplications now live in RAR as packs (https://kody-w.github.io/RAR/distros.html), with one cart and one installer. Every URL here keeps working. cockpit and dock_scotty have no single agent file yet, so they stay here. New rapplications go to RAR. **[📦 Browse the store](https://kody-w.github.io/RAPP_Store/)** · **[🦎 Pokédex API](https://github.com/kody-w/RAPP_Store#pokédex-api)** · **[📋 SPEC](https://github.com/kody-w/RAPP_Store/blob/main/SPEC.md)** · **[🔒 Gated rapps (§11)](https://github.com/kody-w/RAPP_Store/blob/main/SPEC.md#11-gate
 
 ## Role in the ecosystem
 
