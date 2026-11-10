@@ -3,8 +3,9 @@
 **Tier 1** — RAPP Agent Registry — browse/vote/share agent.py files
 
 - Canonical: https://github.com/kody-w/RAR
+- Site: https://kody-w.github.io/RAR/
 - Default branch: `main`
-- Last updated: 2026-09-26T20:29:43Z
+- Last updated: 2026-11-10T13:35:23Z
 - License: MIT
 
 ## Description
