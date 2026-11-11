@@ -1,9 +1,10 @@
 <!-- MIRRORED FROM https://github.com/kody-w/RAR/blob/main/README.md — DO NOT EDIT HERE; edit upstream and re-sync. -->
 
 # RAR — RAPP Agent Registry
+**[Agent Store](https://kody-w.github.io/RAR/)**
 
 <!-- rapp1:network-header:start -->
-[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here) · **Already have an AI?** [Say one sentence to it →](https://kody-w.github.io/RAR/install.html#second-door)
 <!-- rapp1:network-header:end -->
 
 > **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
@@ -99,6 +100,16 @@ by LF and no other normalization. Successful checks produce a receipt committed 
 ## What is this?
 
 RAPP is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
+
+The nine main UI pages (`index`, `distros`, `skills`, `install`, `front`, `store`,
+`discover`, `metrics`, and `submit`) share `nav.js` and `nav.css`. Add primary
+destinations in `nav.js` and keep each page's plain `<noscript>` links in sync.
+The shared bar contains the brand, seven primary links, a native `More` dropdown
+for legacy links and controls, and the existing cart where available. Legacy
+header rows stay hidden with their script-referenced IDs intact; live controls
+move into `More` and the store tab bar stays as the secondary row. No fetch or
+build step is needed, including when opening a page from `file://`. The dropdown
+and plain fallback links also work without JavaScript.
 
 - **Every agent is one `.py` file** — the file IS the package, the manifest, and the documentation
 - **Every card has a seed** — a 64-bit number that reconstructs the full card offline, anywhere
