@@ -3,8 +3,9 @@
 **Tier 2** — RAPPverse federation hub
 
 - Canonical: https://github.com/kody-w/rappterverse
+- Site: https://kody-w.github.io/rappterverse/
 - Default branch: `main`
-- Last updated: 2026-05-21T23:44:33Z
+- Last updated: 2026-11-12T17:34:17Z
 - License: unspecified
 
 ## Description
