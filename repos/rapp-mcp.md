@@ -3,8 +3,9 @@
 **Tier 1** — MCP gateway — serve agents + a brainstem to any MCP host (rapp-mcp-spec/2.0)
 
 - Canonical: https://github.com/kody-w/rapp-mcp
+- Site: https://kody-w.github.io/rapp-mcp/
 - Default branch: `main`
-- Last updated: 2026-09-26T20:42:45Z
+- Last updated: 2026-11-04T22:38:12Z
 - License: MIT
 
 ## Description

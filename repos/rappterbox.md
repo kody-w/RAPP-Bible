@@ -4,7 +4,7 @@
 
 - Canonical: https://github.com/kody-w/rappterbox
 - Default branch: `main`
-- Last updated: 2026-05-11T03:01:47Z
+- Last updated: 2026-10-08T23:03:50Z
 - License: NOASSERTION
 
 ## Description
@@ -13,7 +13,7 @@ Local-first brainstem console for digital organisms — cartridge slot for *_age
 
 ## Summary (from upstream README)
 
-> **A static, local-first runtime for digital organisms — with a cartridge slot.**
+**Retired experiment, kept for reference.** The living project is [kody-w/RAPP](https://github.com/kody-w/RAPP).
 
 ## Role in the ecosystem
 
