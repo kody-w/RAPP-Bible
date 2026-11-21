@@ -3,8 +3,9 @@
 **Tier 3** — Front door — Kody Wildfeuer
 
 - Canonical: https://github.com/kody-w/kody-twin
+- Site: https://kody-w.github.io/kody-twin/
 - Default branch: `main`
-- Last updated: 2026-05-09T23:19:22Z
+- Last updated: 2026-11-12T08:14:13Z
 - License: unspecified
 
 ## Description
@@ -13,7 +14,7 @@ Kody Wildfeuer — RAPP front door
 
 ## Summary (from upstream README)
 
-> A RAPP front door on the public internet. Real estate, not software.
+A RAPP front door on the public internet. Real estate, not software.
 
 ## Role in the ecosystem
 
