@@ -14,7 +14,7 @@ Edit the spec in its canonical repo, not here.
 | Spec | Canonical repo |
 |------|----------------|
 | CONSTITUTION.md, NEIGHBORHOOD_PROTOCOL.md, kernel SPECs | https://github.com/kody-w/RAPP |
-| Network SPEC | https://github.com/kody-w/RAPP-Network |
+| Network SPEC | kody-w/RAPP-Network (private for now; ask the maintainer) |
 | Catalog SPEC | https://github.com/kody-w/RAPP_Store |
 | Registry SPEC | https://github.com/kody-w/RAR |
 | Senses SPEC | https://github.com/kody-w/RAPP_Sense_Store |
